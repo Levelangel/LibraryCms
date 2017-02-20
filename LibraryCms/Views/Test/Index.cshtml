@@ -55,23 +55,6 @@
         var params = new FormData();
         params.append("testFile", document.getElementById("file").files[0]);
         console.log(params);
-        var timer = setInterval(function () {
-            $.ajax({
-                url: '/Test/AjaxUploadPersent',
-                type: 'POST',
-                success: function (percent) {
-                    console.log("Percent=" + percent);
-                    $("#percent").text(percent + "%");
-                    if (percent == "100") {
-                        clearInterval(timer);
-                    }
-                },
-                error: function () {
-                    clearInterval(timer);
-                    console.log("Percent Error");
-                }
-            })
-        }, 100);
         $.ajax({
             type: "POST",
             url: "/Test/AjaxUpload",
@@ -86,7 +69,26 @@
             },
             dataType:'json'
         });
-        
+        var timer = setInterval(function () {
+            $.ajax({
+                url: '/Test/AjaxUploadPersent',
+                type: 'POST',
+                success: function (percent) {
+                    console.log("Percent=" + percent);
+                    
+                    if (percent == "100") {
+                        clearInterval(timer);
+                        $("#percent").text("100%");
+                        return;
+                    }
+                    $("#percent").text(percent.toFixed(2) + "%");
+                },
+                error: function () {
+                    clearInterval(timer);
+                    console.log("Percent Error");
+                }
+            })
+        }, 500);
     }
     //(function () {
     //    var bar = $('.bar');

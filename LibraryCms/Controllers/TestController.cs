@@ -46,6 +46,11 @@ namespace LibraryCms.Controllers
             {
                 cache.Insert("uploadStatus", 0);
             }
+            if (cache["uploadStatus"].ToString() == "100")
+            {
+                cache["uploadStatus"] = 0;
+                return Json("100");
+            }
             return Json(cache["uploadStatus"]);
         }
 
@@ -66,6 +71,7 @@ namespace LibraryCms.Controllers
                 bw.Flush();
                 saveCount += readCount;//已经上传的进度
                 cache.Insert("uploadStatus", saveCount * 100.0f / filelength);
+                Thread.Sleep(1);
                 //Cache = saveCount * 100.0f / filelength;
             }
             fs.Close();
