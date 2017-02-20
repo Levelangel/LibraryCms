@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <style>
+        div {
+            width:80%;
+            margin: 0 auto;
+        }
+        .aa {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        @{
+            List<string> Content = ViewBag.Content;
+            string classP = "class = aa";
+            foreach (var line in Content)
+            {
+                string tmp = "<p ";
+                if (line.Contains('第') && line.Contains('章'))
+                {
+                    tmp = tmp + classP;
+                }
+                tmp = tmp + ">" + line + "</p>";
+                @(new HtmlString(tmp))
+            }
+        }
+    </div>
+</body>
+</html>

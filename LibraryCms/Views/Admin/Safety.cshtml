@@ -1,0 +1,36 @@
+﻿@using LibraryCms.Models
+@{
+    ViewBag.Title = "账户安全";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    User user = (User)Session["User"];
+}
+
+@Styles.Render("~/Content/css-personalcenter")
+
+@Scripts.Render("~/Scripts/js-account")
+<div id="personal-head">
+    <ul id="personalhead">
+        <li><a href="~/Admin/PersonalCenter">个人信息</a></li>
+        <li><a href="~/Admin/PersonalCenter/Safety" class="now-page">账户安全</a></li>
+        <li><a href="~/Admin/PersonalCenter/PersonalMail">私信箱</a></li>
+    </ul>
+    <span>@user.Name<a class="logout" href="javascript:;" onclick="logout()">退出</a></span>
+</div>
+
+<ul id="safety">
+    <li class ="pic-password">
+        <p id="passwordtitle" class="title">登陆密码</p>
+        <p id="passwordintro" class="introdution">用于登录系统和保护账号信息</p>
+        <a href="javascript:;">修改</a>
+    </li>
+    <li class="pic-phone">
+        <p id="phonetitle" class="title">安全手机</p>
+        <p id="phoneintro" class="introdution">安全手机可以用于登录，找回密码</p>
+        <a href="javascript:;">@(user.Phone == ""?"绑定":"更换")</a>
+    </li>
+    <li class="pic-mail">
+        <p id="mailtitle" class="title">安全邮箱</p>
+        <p id="mailintro" class="introdution">安全邮箱可以用于登录，找回密码</p>
+        <a href="javascript:;">@(user.Mail == "" ? "绑定" : "更换")</a>
+    </li>
+</ul>

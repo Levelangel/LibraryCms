@@ -1,0 +1,32 @@
+﻿@using LibraryCms.Models
+@{
+    ViewBag.Title = "个人信息";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    User user = (User)Session["User"];
+}
+
+@Styles.Render("~/Content/css-personalcenter")
+
+@Scripts.Render("~/Scripts/js-account")
+<div id="personal-head">
+    <ul id="personalhead">
+        <li><a href="~/Admin/PersonalCenter" class="now-page">个人信息</a></li>
+        <li><a href="~/Admin/PersonalCenter/Safety">账户安全</a></li>
+        <li><a href="~/Admin/PersonalCenter/PersonalMail">私信箱</a></li>
+    </ul>
+    <span>@user.Name<a class="logout" href="javascript:;" onclick="logout()">退出</a></span>
+</div>
+
+<ul id="personalinfo">
+    <li><span>账号：</span>@{if (user == null){Write("");}else {Write(user.Number);}}</li>
+    <li><span>姓名：</span><input type="text" value="@user.Name" /></li>
+    <li>
+        <span>性别：</span>
+        <input id="RadioMan" name="sex" type="radio" @(user.Sex == "男" ? "checked=\"checked\"" : "")/>男
+        <input id="RadioWoman" name="sex" type="radio" @(user.Sex == "女" ? "checked=\"checked\"" : "")/>女
+    </li>
+    <li><span>邮箱：</span>@(user.Mail == "" ? "未绑定" : user.Mail)</li>
+    <li><span>手机号码：</span>@(user.Phone == ""?"未绑定":user.Phone)</li>
+    <li><span>QQ号码：</span><input type="text" value="@user.QQ"/></li>
+    <li><span></span><a href="javascript:;">保存修改</a></li>
+</ul>

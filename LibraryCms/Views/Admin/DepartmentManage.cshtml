@@ -1,0 +1,50 @@
+﻿@using LibraryCms.Models
+@{
+    ViewBag.Title = "系部管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    User user = (User)Session["User"];
+}
+
+@Styles.Render("~/Content/css-advancemanage")
+@Scripts.Render("~/Scripts/js-departmentmanage")
+<div id="anvancemange-head">
+    <ul id="anvancemange">
+        @{
+            string right = user.Role.Rights;
+            if (right[0] == '1')
+            {
+                @(new HtmlString("<li><a href=\"/Admin/AdvanceManage/BookManage\">书籍管理</a></li>"))
+            }
+            if (right[1] == '1')
+            {
+                @(new HtmlString("<li><a href=\"/Admin/AdvanceManage/BookTypeManage\">书籍类别管理</a></li>"))
+            }
+            if (right[2] == '1')
+            {
+                @(new HtmlString("<li><a href=\"/Admin/AdvanceManage/BookQuestionBank\">书籍题库</a></li>"))
+            }
+            if (right[3] == '1')
+            {
+                @(new HtmlString("<li><a href=\"/Admin/AdvanceManage/UserManage\">用户管理</a></li>"))
+            }
+            if (right[4] == '1')
+            {
+                @(new HtmlString("<li><a href=\"/Admin/AdvanceManage/GroupManage\">用户组管理</a></li>"))
+            }
+            if (right[5] == '1')
+            {
+                @(new HtmlString("<li><a href=\"/Admin/AdvanceManage/DepartmentManage\" class=\"now-page\">系部管理</a></li>"))
+            }
+        }
+    </ul>
+</div>
+
+<div id="searchbox">
+    <input type="text" id="txtSearch" placeholder="系名/部名"/><a href="javascript:;" onclick="SearchDepartment()">搜索</a><a href="javascript:;">添加</a>
+</div>
+
+<div id="result">
+    <ul>
+
+    </ul>
+</div>

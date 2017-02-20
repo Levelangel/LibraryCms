@@ -1,0 +1,21 @@
+﻿@using LibraryCms.Models
+@{
+    ViewBag.Title = "私信箱";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    User user = (User)Session["User"];
+}
+
+@Styles.Render("~/Content/css-personalcenter")
+
+@Scripts.Render("~/Scripts/js-account")
+<div id="personal-head">
+    <ul id="personalhead">
+        <li><a href="~/Admin/PersonalCenter">个人信息</a></li>
+        <li><a href="~/Admin/PersonalCenter/Safety" >账户安全</a></li>
+        <li><a href="~/Admin/PersonalCenter/PersonalMail" class="now-page">私信箱</a></li>
+    </ul>
+    <span>@user.Name<a class="logout" href="javascript:;" onclick="logout()">退出</a></span>
+</div>
+<ul id="PersonalMail">
+    <li><span>来自：test</span><span class="title">主题：dsdfsdfsdfsf</span><br/><p class="content">内容：【128字】<span></span></p></li>
+</ul>
