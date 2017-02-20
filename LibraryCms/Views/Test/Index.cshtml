@@ -12,10 +12,7 @@
 <body>
     <div class="container">
         <div class="row">
-            <h2>
-                AJAX异步方式-上传文件
-            </h2>
-            @using (Html.BeginForm("AjaxUpload", "Test", FormMethod.Post, new { id = "uploadForm", @class = "form-horizontal", enctype = "multipart/form-data" }))
+            @*@using (Html.BeginForm("AjaxUpload", "Test", FormMethod.Post, new { id = "uploadForm", @class = "form-horizontal", enctype = "multipart/form-data" }))
             {
                 <div class="form-group">
                     <label for="file">
@@ -35,52 +32,91 @@
                         上传
                     </button>
                 </div>
-            }
+            }*@
+            <input id="file" name="file" type="file" />
+            <a href="javascript:;" onclick="testUpload();">Upload</a>
         </div>
-        <div class="row">
+        <div id="percent">
+            0%
+        </div>
+        @*<div class="row">
             <div class="progress">
                 <div class="bar">
                 </div>
-                <div class="percent">
-                    0%
-                </div>
+
             </div>
             <div id="status">
             </div>
-        </div>
+        </div>*@
     </div>
-    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/jquery")
     <script type="text/javascript">
-
-        (function () {
-            var bar = $('.bar');
-            var percent = $('.percent');
-            var status = $('#status');
-            $('#uploadForm').on('submit', function (e) {
-                e.preventDefault(); // <-- important
-                $(this).ajaxSubmit({
-                    beforeSend: function () {
-                        status.empty();
-                        var percentVal = '0%';
-                        bar.width(percentVal);
-                        percent.html(percentVal);
-                    },
-                    uploadProgress: function (event, position, total, percentComplete) {
-                        var percentVal = percentComplete + '%';
-                        bar.width(percentVal);
-                        percent.html(percentVal);
-                    },
-                    success: function () {
-                        var percentVal = '100%';
-                        bar.width(percentVal);
-                        percent.html(percentVal);
-                    },
-                    complete: function (xhr) {
-                        status.html(xhr.responseText);
+    function testUpload() {
+        var params = new FormData();
+        params.append("testFile", document.getElementById("file").files[0]);
+        console.log(params);
+        var timer = setInterval(function () {
+            $.ajax({
+                url: '/Test/AjaxUploadPersent',
+                type: 'POST',
+                success: function (percent) {
+                    console.log("Percent=" + percent);
+                    $("#percent").text(percent + "%");
+                    if (percent == "100") {
+                        clearInterval(timer);
                     }
-                });
-            });
-        })();
+                },
+                error: function () {
+                    clearInterval(timer);
+                    console.log("Percent Error");
+                }
+            })
+        }, 100);
+        $.ajax({
+            type: "POST",
+            url: "/Test/AjaxUpload",
+            data: params,
+            contentType: false,//必须false才会自动加上正确的Content-Type
+            processData: false,//必须false才会避开jQuery对 formdata 的默认处理 ，XMLHttpRequest会对 formdata 进行正确的处理
+            success: function (result) {
+                console.log(result);
+            },
+            error: function () {
+                alert("Error");
+            },
+            dataType:'json'
+        });
+        
+    }
+    //(function () {
+    //    var bar = $('.bar');
+    //    var percent = $('.percent');
+    //    var status = $('#status');
+    //    $('#uploadForm').on('submit', function (e) {
+    //        e.preventDefault(); // <-- important
+    //        $(this).ajaxSubmit({
+    //            beforeSend: function () {
+    //                status.empty();
+    //                var percentVal = '0%';
+    //                bar.width(percentVal);
+    //                percent.html(percentVal);
+    //            },
+    //            uploadProgress: function (event, position, total, percentComplete) {
+    //                var percentVal = percentComplete + '%';
+    //                bar.width(percentVal);
+    //                percent.html(percentVal);
+    //            },
+    //            success: function () {
+    //                var percentVal = '100%';
+    //                bar.width(percentVal);
+    //                percent.html(percentVal);
+    //            },
+    //            complete: function (xhr) {
+    //                status.html(xhr.responseText);
+    //            }
+    //        });
+    //    });
+    //})();
     </script>
 </body>
 </html>
