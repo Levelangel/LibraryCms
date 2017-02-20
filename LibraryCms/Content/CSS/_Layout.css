@@ -1,0 +1,65 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    min-width:1020px;
+}
+
+#nav {
+    display: block;
+    height:40px;
+    width:100%;
+    background-color:rgba(0,0,0,0.8);
+    overflow: hidden;
+    position: relative;
+}
+
+#nav li {
+    float:left;
+    list-style-type:none;
+    margin-right:20px;
+}
+
+#nav li:first-child {
+    margin-left:200px;
+}
+
+#nav li a {
+    display: inline-block;
+    height:40px;
+    line-height:40px;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-family: "Microsoft YaHei";
+}
+
+#nav li a:hover {
+    text-decoration: underline;
+    color:#fff;
+}
+
+.Search {
+    position: absolute;
+    right:200px;
+}
+
+.Search input {
+    margin-right:20px;
+    outline:none;
+    font-family: "Microsoft YaHei";
+}
+
+#frame {
+    width: 70%;
+    margin: 0px auto;
+    /*overflow: hidden;*/
+}
+
+#footer {
+    bottom: 0;
+    height:80px;
+    width:100%;
+    background-color:rgba(255,0,0,0.4);
+}

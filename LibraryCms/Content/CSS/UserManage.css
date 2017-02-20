@@ -1,0 +1,155 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+#anvancemange-head {
+    position: relative;
+}
+
+#anvancemange-head .logout {
+    margin-left:20px;
+    color: #5FBB39;
+    text-decoration:none;
+}
+
+#anvancemange {
+    display: block;
+    height:60px;
+    border-bottom:solid 1px #ccc;
+}
+
+#anvancemange li {
+    list-style-type: none;
+    float: left;
+}
+
+#anvancemange li a {
+    display: block;
+    height:60px;
+    width:100px;
+    line-height:60px;
+    text-align: center;
+    text-decoration: none;
+    font-family: "Microsoft YaHei";
+    color: rgba(0,0,0,0.6);
+}
+
+.now-page {
+    color: #000!important;
+    border-bottom: solid 2px #5FBB39;
+}
+
+#anvancemange li a:hover {
+    color: #000;
+    border-bottom: solid 2px #5FBB39;
+}
+
+#searchbox {
+    margin-top: 20px;
+    font-family: "Microsoft YaHei";
+}
+
+#searchbox input {
+    height :50px;
+    line-height: 50px;
+    width:50%;
+    border:solid 1px #ccc;
+    border-radius:4px;
+    outline-color: #5FBB39;
+    font-size:18px;
+    padding-left:20px;
+}
+
+#searchbox a {
+    display: inline-block;
+    width: 19%;
+    height:50px;
+    line-height:50px;
+    text-decoration:none;
+    text-align: center;
+    margin-left:4%;
+    border:solid 1px #5FBB39;
+    color: #5FBB39;
+    border-radius:4px;
+    transition: all linear 0.2s;
+    -o-transition: all linear 0.2s;
+    -ms-transition: all linear 0.2s;
+    -webkit-transition: all linear 0.2s;
+    -moz-transition: all linear 0.2s;
+}
+
+#searchbox a:hover {
+    color:#fff;
+    background-color:#5FBB39;
+}
+
+#result ul {
+    margin-top:20px;
+    list-style-type:none;
+    font-family: "Microsoft YaHei";
+    padding-left:20%;
+}
+
+#result ul li {
+    margin-bottom:20px;
+}
+
+#result ul li span {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+    height:30px;
+    line-height: 30px;
+}
+
+#result ul li input {
+    width: 50%;
+    height: 40px;
+    font-family: "Microsoft YaHei";
+    outline-color: #5FBB39;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size:16px;
+    padding-left: 20px
+}
+
+#RadioMan,#RadioWoman {
+    width: 18px !important;
+    height:18px !important;
+    vertical-align:middle;
+    margin: 0 5px 0 20px;
+}
+
+#result ul li a {
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 70%;
+    height:40px;
+    line-height:40px;
+    border:solid 1px #5FBB39;
+    color: #5FBB39;
+    border-radius:4px;
+    transition: all linear 0.2s;
+    -o-transition: all linear 0.2s;
+    -ms-transition: all linear 0.2s;
+    -webkit-transition: all linear 0.2s;
+    -moz-transition: all linear 0.2s;
+}
+
+#result ul li a:hover {
+    color:#fff;
+    background-color:#5FBB39;
+}
+
+#result ul li select {
+    width: 50%;
+    height: 40px;
+    font-family: "Microsoft YaHei";
+    outline-color: #5FBB39;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size:16px;
+    padding-left: 20px
+}

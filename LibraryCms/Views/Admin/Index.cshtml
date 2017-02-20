@@ -1,0 +1,30 @@
+﻿@using LibraryCms.Models
+@{
+    ViewBag.Title = "首页";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    a {
+        display: block;
+    }
+</style>
+
+<h3>推荐书籍</h3>
+
+@{
+    List<Book> RecoBooks = ViewBag.RecoBooks;
+    foreach (var recoBook in RecoBooks)
+    {
+        @(new HtmlString("<a href=\"javascript:;\" onclick=\"ReadBook(" + recoBook.BookId + ")\">" + recoBook.BookName + "</a>"));
+    }
+}
+
+
+@*<a href="javascript:;" onclick="ReadBook()">Effective C++ 第三版（英文）.pdf</a>*@
+
+<script>
+    function ReadBook(bookId) {
+        window.open('/Admin/ReadBook/' + bookId);
+    }
+</script>

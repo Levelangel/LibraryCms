@@ -1,0 +1,35 @@
+﻿@using LibraryCms.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/Scripts/jquery")
+    @Scripts.Render("~/Scripts/js-layout")
+    @Scripts.Render("~/Scripts/js-layer")
+    @Styles.Render("~/Content/css-layout")
+    @{
+        User user = (User) Session["User"];
+    }
+</head>
+<body>
+<div id="header">
+    <ul id="nav">
+        <li><a href="/Admin/Index">首页</a></li>
+        <li><a href="/Admin/Books">书目浏览</a></li>
+        <li><a href="/Admin/TestingOnline">在线测试</a></li>
+        @{
+            if (user.Role.Rights != "000000")
+            {
+                @(new HtmlString("<li><a href=\"/Admin/AdvanceManage\">高级管理</a></li>"))
+            }
+        }
+        <li><a href="/Admin/PersonalCenter">个人中心</a></li>
+        <li class="Search"><input type="text" placeholder="请输入要搜索的书名" /><a href="javascript:;">搜索</a></li>
+    </ul>
+</div>
+<div id="frame">@RenderBody()</div>
+
+</body>
+</html>

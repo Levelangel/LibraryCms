@@ -1,0 +1,207 @@
+﻿* {
+    margin:0;
+    padding:0;
+}
+
+#personal-head {
+    position: relative;
+}
+
+#personal-head span {
+    position: absolute;
+    right: 30px;
+    top: 20px;
+    font-family: "Microsoft YaHei";
+}
+
+#personal-head span:hover {
+    text-decoration: underline;
+}
+
+#personal-head .logout {
+    margin-left:20px;
+    color: #5FBB39;
+    text-decoration:none;
+}
+
+#personalhead {
+    display: block;
+    height:60px;
+    border-bottom:solid 1px #ccc;
+}
+
+#personalhead li {
+    list-style-type: none;
+    float: left;
+}
+
+#personalhead li a {
+    display: block;
+    height:60px;
+    width:100px;
+    line-height:60px;
+    text-align: center;
+    text-decoration: none;
+    font-family: "Microsoft YaHei";
+    color: rgba(0,0,0,0.6);
+}
+
+.now-page {
+    color: #000!important;
+    border-bottom: solid 2px #5FBB39;
+}
+
+#personalhead li a:hover {
+    color: #000;
+    border-bottom: solid 2px #5FBB39;
+}
+
+#safety {
+    margin-top:60px;
+}
+
+#safety li {
+    display: block;
+    height:100px;
+    /*width:99%;*/
+    margin-bottom:40px;
+    border:solid 1px #ccc;
+    padding-left:100px;
+    border-radius:5px;
+    font-family: "Microsoft YaHei";
+    position: relative;
+}
+
+#safety li:hover {
+    box-shadow: 0 0 6px #5FBB39;
+}
+
+#safety p:first-child {
+    margin-top: 20px;
+    font-size:18px;
+    color: rgba(0,0,0,0.8);
+}
+
+#safety p {
+    margin-top: 10px;
+    color: #899194;
+}
+
+#safety a {
+    display: block;
+    position: absolute;
+    top:50%;
+    height:40px;
+    width:100px;
+    margin-top:-20px;
+    right:40px;
+    text-align: center;
+    line-height:40px;
+    text-decoration:none;
+    border:solid 1px #5FBB39;
+    color: #5FBB39;
+    border-radius:4px;
+    transition: all linear 0.2s;
+    -o-transition: all linear 0.2s;
+    -ms-transition: all linear 0.2s;
+    -webkit-transition: all linear 0.2s;
+    -moz-transition: all linear 0.2s;
+}
+
+#safety a:hover {
+    color:#fff;
+    background-color:#5FBB39;
+}
+
+#personalinfo {
+    margin:20px auto 0;
+    list-style-type:none;
+}
+
+#personalinfo li{
+    display: block;
+    margin-bottom:30px;
+    font-family: "Microsoft YaHei";
+}
+
+#personalinfo li span {
+     display: inline-block;
+     width: 220px;
+     text-align: right;
+     margin-right: 10px;
+}
+
+ #personalinfo li input {
+     font-family: "Microsoft YaHei";
+     font-size:16px;
+     width: 500px;
+     height:40px;
+     line-height:40px;
+     outline-color: #5FBB39;
+ }
+
+#RadioMan, 
+#RadioWoman{
+    width:18px !important;
+    height:18px !important;
+    vertical-align:middle;
+}
+
+#RadioWoman {
+    margin-left:50px;
+}
+
+#personalinfo a {
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width:500px;
+    height:40px;
+    line-height:40px;
+    border:solid 1px #5FBB39;
+    color: #5FBB39;
+    border-radius:4px;
+    transition: all linear 0.2s;
+    -o-transition: all linear 0.2s;
+    -ms-transition: all linear 0.2s;
+    -webkit-transition: all linear 0.2s;
+    -moz-transition: all linear 0.2s;
+}
+
+#personalinfo a:hover {
+    color:#fff;
+    background-color:#5FBB39;
+}
+
+#PersonalMail {
+    margin-top:20px;
+    list-style-type:none;
+}
+
+#PersonalMail li {
+    height: 100px;
+    margin: 0 auto 20px;
+    border:solid 1px #ccc;
+    padding :5px;
+    width: 80%;
+    border-radius:4px;
+    color: rgba(0,0,0,0.8);
+}
+
+#PersonalMail li:hover {
+    box-shadow: 0 0 6px #5FBB39;
+}
+
+#PersonalMail li span {
+    display: inline-block;
+    font-family: "Microsoft YaHei";
+}
+#PersonalMail li .title {
+    margin-left:200px;
+    color :#000;
+}
+
+#PersonalMail li .content {
+    margin-top:10px;
+    line-height:150%;
+}
