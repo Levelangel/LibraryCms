@@ -1,15 +1,4 @@
-﻿function bookUpload() {
-    layer.open({
-        type: 2,
-        title: '书籍上传',
-        shadeClose: true,
-        shade: 0.7,
-        area: ['800px', '600px'],
-        content: '/Admin/BookUpload'
-    });
-}
-
-function GetBook() {
+﻿function GetBook2() {
     var strSearch = $('#txtSearch').val();
     if (strSearch === '') {
         dialog.error('请输入查找的条件！');
@@ -30,5 +19,21 @@ function GetBook() {
                 dialog.worning('没有查找到符合的结果！');
             }
         }
-    },"JSON");
+    }, "JSON");
 }
+
+$(document).ready(function () {
+    $('#fil').change(function () {
+        var str = $(this).val();
+        var arr = str.split('\\');//注split可以用字符或字符串分割 
+        var fileName = arr[arr.length - 1];//这就是要取得的文件名称
+        if (fileName != "") {
+            $('#filename').text(fileName);
+            $('#filename').addClass("filenamehover");
+        } else {
+            $('#filename').text("未选择任何文件");
+            $('#filename').removeClass("filenamehover");
+        }
+        
+    });
+});

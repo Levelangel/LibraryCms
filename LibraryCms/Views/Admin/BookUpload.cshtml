@@ -7,11 +7,32 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css-bookupload")
+    @Scripts.Render("~/Scripts/jquery")
+    @Scripts.Render("~/Scripts/js-bookupload")
     <title>BookUpload</title>
 </head>
 <body>
-    <div>
-        上传
-    </div>
+    <a class="a-upload">
+        单击这里选择文件
+        <input id="fil" type="file" name="" value="">
+    </a><span id="filename" class="filename">未选择任何文件</span>
+    <ul>
+        <li><span>书籍名</span><input type="text" name="bookName" value="" /></li>
+        <li><span>作者</span><input type="text" name="author" value="" /></li>
+        <li><span>出版社</span><input type="text" name="publisher" value="" /></li>
+        <li><span>页数</span><input type="number" name="pages" value="" min="1"/></li>
+        <li><span>出版时间</span><input type="month" name="publicTime" value="" /></li>
+        <li>
+            <span>格式</span>
+            <input id="format" list="formats"/>
+            <datalist id="formats">
+                <option value="txt">
+                <option value="pdf">
+            </datalist>
+        </li>
+    </ul>
+    <a href="javascript:;" class="btnUpload" onclick="startUpload();">上传文件</a>
+    <div id="status"></div>
 </body>
 </html>

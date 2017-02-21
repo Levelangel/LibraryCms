@@ -44,6 +44,8 @@ namespace LibraryCms
             bundles.Add(new StyleBundle("~/Content/css-usermanage").Include("~/Content/css/UserManage.css"));
             bundles.Add(new ScriptBundle("~/Scripts/js-layer").Include("~/Content/layer/layer.js", "~/Scripts/dialog.js"));
             bundles.Add(new ScriptBundle("~/Scripts/js-bookmanage").Include("~/Scripts/BookManage.js"));
+            bundles.Add(new StyleBundle("~/Content/css-bookupload").Include("~/Content/css/bookupload.css"));
+            bundles.Add(new ScriptBundle("~/Scripts/js-bookupload").Include("~/Scripts/bookupload.js"));
         }
     }
 }

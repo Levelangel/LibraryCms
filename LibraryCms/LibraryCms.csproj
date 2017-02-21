@@ -148,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\CSS\advancemanage.css" />
+    <Content Include="Content\CSS\bookUpload.css" />
     <Content Include="Content\CSS\login.css" />
     <Content Include="Content\CSS\personalcenter.css" />
     <Content Include="Content\CSS\UserManage.css" />
@@ -217,6 +218,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\account.js" />
     <Content Include="Scripts\BookManage.js" />
+    <Content Include="Scripts\bookupload.js" />
     <Content Include="Scripts\canvas-nest.min.js" />
     <Content Include="Scripts\DepartmentManage.js" />
     <Content Include="Scripts\dialog.js" />

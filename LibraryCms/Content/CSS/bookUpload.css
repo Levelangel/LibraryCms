@@ -1,0 +1,124 @@
+﻿* {
+    margin:0;
+    padding:0;
+    font-family: "Microsoft YaHei";
+}
+
+.a-upload {
+    padding: 4px 10px;
+    margin:20px 0 20px 50px;
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    text-decoration:none;
+    text-align: center;
+    border:solid 1px #5FBB39;
+    color: #5FBB39;
+    border-radius:4px;
+    transition: all linear 0.2s;
+    -o-transition: all linear 0.2s;
+    -ms-transition: all linear 0.2s;
+    -webkit-transition: all linear 0.2s;
+    -moz-transition: all linear 0.2s;
+}
+.a-upload:hover {
+    color:#fff;
+    background-color:#5FBB39;
+}
+.a-upload input {
+    position: absolute;
+    font-size: 200px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer
+}
+.filename {
+    display:inline-block;
+    position:absolute;
+    height: 40px;
+    width:500px;
+    line-height: 40px;
+    padding: 4px 10px;
+    text-align:center;
+    border:solid 1px #ccc;
+    border-radius: 4px;
+    top: 20px;
+    left: 220px;
+    color:#ccc;
+}
+
+.filenamehover,
+.filename:hover {
+    border:solid 1px #5FBB39;
+    color:rgba(0,0,0,0.8);
+}
+
+ul {
+    width:690px;
+    text-align:center;
+    margin:0 auto;
+    list-style:none;
+}
+
+ul > li {
+    margin-bottom:20px;
+}
+
+ul > li > span {
+    display:inline-block;
+    text-align:right;
+    width: 100px;
+    height:40px;
+    line-height:40px;
+}
+
+ul > li > input{
+    width:380px;
+    height:40px;
+    line-height:40px;
+    margin-left:40px;
+    padding-left:20px;
+    font-size:16px;
+    border:solid 1px #ccc;
+    border-radius:4px;
+    outline-color: #5FBB39;
+}
+
+.btnUpload {
+    display:block;
+    padding: 4px 10px;
+    width:150px;
+    margin-left:500px;
+    height: 40px;
+    line-height: 40px;
+    cursor: pointer;
+    text-decoration:none;
+    text-align: center;
+    border:solid 1px #5FBB39;
+    color: #5FBB39;
+    border-radius:4px;
+    transition: all linear 0.2s;
+    -o-transition: all linear 0.2s;
+    -ms-transition: all linear 0.2s;
+    -webkit-transition: all linear 0.2s;
+    -moz-transition: all linear 0.2s;
+}
+
+.btnUpload:hover{
+    color:#fff;
+    background-color:#5FBB39;
+}
+
+#status {
+    position:absolute;
+    top:480px;
+    left:270px;
+    color:red;
+}
