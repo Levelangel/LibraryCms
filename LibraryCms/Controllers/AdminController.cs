@@ -25,7 +25,7 @@ namespace LibraryCms.Controllers
             return View();
         }
 
-        public ActionResult PersonalCenter()
+        public ActionResult PersonalCenter() //个人中心
         {
             if (Session["isLogin"] == null || Session["isLogin"].ToString() == "False")
             {
@@ -37,7 +37,7 @@ namespace LibraryCms.Controllers
                 id = ControllerContext.RouteData.Values["ID"].ToString();
             }
             
-            switch (id)
+            switch (id) //根据id显示页面
             {
                 case "Safety":
                     return View("Safety");
@@ -96,7 +96,7 @@ namespace LibraryCms.Controllers
             }
             User user = (User)Session["User"];
             string right = user.Role.Rights;
-            if (right[5] != '1')
+            if (right[5] != '1') //检查用户权限
             {
                 return Json("No Rights");
             }
@@ -104,7 +104,7 @@ namespace LibraryCms.Controllers
             List<Department> Departments = DAL.GetDepartment(strSearch);
             JavaScriptSerializer jss = new JavaScriptSerializer();
             string tmp = "";
-            foreach (Department department in Departments)
+            foreach (Department department in Departments)  //序列化List泛型为JSON字符串
             {
                 string JsonStr = jss.Serialize(department);
                 tmp += JsonStr + "|";
@@ -168,7 +168,7 @@ namespace LibraryCms.Controllers
             return Json(DAL.GetUser(strSearch));
         }
 
-        public ActionResult BookUpload()
+        public ActionResult BookUpload() //书籍上传
         {
             if (Session["isLogin"] == null || Session["isLogin"].ToString() == "False")
             {
@@ -274,19 +274,19 @@ namespace LibraryCms.Controllers
         }
 
         [HttpPost]
-        public ActionResult AjaxUpload()
+        public ActionResult AjaxUpload() //书籍上传Ajax接受地址
         {
             try
             {
                 var postedFile = Request.Files[0];  
-                if (postedFile == null || postedFile.ContentLength <= 0) return Json("请选择要上传的文件");
-                string savePath = Server.MapPath("/Upload/temp/") + postedFile.FileName + ".tmp";
+                if (postedFile == null || postedFile.ContentLength <= 0) return Json("no file");
+                string savePath = Server.MapPath("/Upload/temp/") + postedFile.FileName + ".tmp"; //存储到临时位置
                 Cache cache = HttpRuntime.Cache;
                 cache.Insert("uploadStatus", 0);
                 SaveFile(savePath, postedFile);
-                string md5 = MD5.GetMD5HashFromFile(savePath);
+                string md5 = MD5.GetMD5HashFromFile(savePath); //计算书籍MD5
                 string fileName = Server.MapPath("/Upload/Books/") + md5 + Path.GetExtension(postedFile.FileName);
-                System.IO.File.Move(savePath, fileName);
+                System.IO.File.Move(savePath, fileName); //书籍改名
                 return Json("success");
             }
             catch
@@ -296,7 +296,7 @@ namespace LibraryCms.Controllers
         }
 
         [HttpPost]
-        public ActionResult AjaxUploadPersent()
+        public ActionResult AjaxUploadPersent() //读取书籍上传进度响应地址
         {
             Cache cache = HttpRuntime.Cache;
             if(cache["uploadStatus"] == null)
@@ -317,16 +317,16 @@ namespace LibraryCms.Controllers
             BinaryWriter bw = new BinaryWriter(fs);
             BinaryReader br = new BinaryReader(file.InputStream);
 
-            int readCount = 0;//单次读取的字节数
+            int readCount = 0;
             int saveCount = 0;
             byte[] buf = new byte[20 * 1024];
             int filelength = file.ContentLength;
             while ((readCount = br.Read(buf, 0, buf.Length)) > 0)
             {
-                bw.Write(buf, 0, readCount);//写入字节到文件流
+                bw.Write(buf, 0, readCount);
                 bw.Flush();
-                saveCount += readCount;//已经上传的进度
-                cache.Insert("uploadStatus", saveCount * 100.0f / filelength);
+                saveCount += readCount;
+                cache.Insert("uploadStatus", saveCount * 100.0f / filelength); //计算上传完成度
                 Thread.Sleep(1);
             }
             fs.Close();
