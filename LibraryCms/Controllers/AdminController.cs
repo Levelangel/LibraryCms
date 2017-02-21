@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using LibraryCms.Models;
 using System.Web.Script.Serialization;
+using System.Web.Caching;
+using System.Threading;
 
 namespace LibraryCms.Controllers
 {
@@ -270,5 +272,67 @@ namespace LibraryCms.Controllers
             List<Book> books = DAL.GetRecomendBooks();
             return books;
         }
+
+        [HttpPost]
+        public ActionResult AjaxUpload()
+        {
+            try
+            {
+                var postedFile = Request.Files[0];  
+                if (postedFile == null || postedFile.ContentLength <= 0) return Json("请选择要上传的文件");
+                string savePath = Server.MapPath("/Upload/temp/") + postedFile.FileName + ".tmp";
+                Cache cache = HttpRuntime.Cache;
+                cache.Insert("uploadStatus", 0);
+                SaveFile(savePath, postedFile);
+                string md5 = MD5.GetMD5HashFromFile(savePath);
+                string fileName = Server.MapPath("/Upload/Books/") + md5 + Path.GetExtension(postedFile.FileName);
+                System.IO.File.Move(savePath, fileName);
+                return Json("success");
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AjaxUploadPersent()
+        {
+            Cache cache = HttpRuntime.Cache;
+            if(cache["uploadStatus"] == null)
+            {
+                cache.Insert("uploadStatus", 0);
+            }
+            if (cache["uploadStatus"].ToString() == "100")
+            {
+                cache["uploadStatus"] = 0;
+                return Json("100");
+            }
+            return Json(cache["uploadStatus"]);
+        }
+
+        private void SaveFile(string savePath, HttpPostedFileBase file){
+            Cache cache = HttpRuntime.Cache;
+            FileStream fs = new FileStream(savePath, FileMode.Create);
+            BinaryWriter bw = new BinaryWriter(fs);
+            BinaryReader br = new BinaryReader(file.InputStream);
+
+            int readCount = 0;//单次读取的字节数
+            int saveCount = 0;
+            byte[] buf = new byte[20 * 1024];
+            int filelength = file.ContentLength;
+            while ((readCount = br.Read(buf, 0, buf.Length)) > 0)
+            {
+                bw.Write(buf, 0, readCount);//写入字节到文件流
+                bw.Flush();
+                saveCount += readCount;//已经上传的进度
+                cache.Insert("uploadStatus", saveCount * 100.0f / filelength);
+                Thread.Sleep(1);
+            }
+            fs.Close();
+            bw.Close();
+            br.Close();
+        }
     }
+    
 }

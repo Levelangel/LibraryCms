@@ -25,12 +25,15 @@ namespace LibraryCms.Controllers
                 var postedFile = Request.Files[0];//只示范上传一个文件  
                 if (postedFile == null || postedFile.ContentLength <= 0) return Json("请选择要上传的文件");
                 //string savePath = Server.MapPath("/Upload/Books/") + Request["filename"] + Path.GetExtension(postedFile.FileName);
-                string savePath = Server.MapPath("/Upload/test/") + postedFile.FileName;
+                string savePath = Server.MapPath("/Upload/test/") + postedFile.FileName + ".tmp";
                 //postedFile.SaveAs(savePath);
                 //int filelength = postedFile.ContentLength;
                 Cache cache = HttpRuntime.Cache;
                 cache.Insert("uploadStatus", 0);
                 SaveFile(savePath, postedFile);
+                string md5 = MD5.GetMD5HashFromFile(savePath);
+                string fileName = Server.MapPath("/Upload/Books/") + md5 + Path.GetExtension(postedFile.FileName);
+                System.IO.File.Move(savePath, fileName);
                 return Json("AJAX上传成功");
             }
             catch
