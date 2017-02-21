@@ -2,3 +2,5 @@ LibraryCms/bin/
 LibraryCms/obj/
 LibraryCms/Upload/test/
 LibraryCms/Upload/temp/
+LibraryCms/Views/Test/
+LibraryCms/Controllers/TestController.cs
