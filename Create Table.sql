@@ -101,17 +101,17 @@ AS
 BEGIN
     DECLARE @md5 varchar(34)
     SET @md5 = sys.fn_VarBinToHexStr(hashbytes('MD5', @src));
-    --RETURN SUBSTRING(@md5,11,16)   --16Î»
-    RETURN SUBSTRING(@md5,3,32)    --32Î»
+    --RETURN SUBSTRING(@md5,11,16)   --16ä½
+    RETURN SUBSTRING(@md5,3,32)    --32ä½
 END
 GO
 USE LibraryCms
-INSERT INTO tb_Department_A VALUES('³¬¼¶¹ÜÀíÔ±')
-INSERT INTO tb_Department_B VALUES('ÊıÑ§²¿')
-INSERT INTO tb_Department_X VALUES('¼ÆËã»úÏµ')
-INSERT INTO tb_Role VAlUES('³¬¼¶¹ÜÀíÔ±×é','A',1,'111111')
-INSERT INTO tb_Book VALUES('Effective C++ µÚÈı°æ£¨Ó¢ÎÄ£©','Scott Meyers',NULL,297,'2006-07','pdf','A94069B3A7259496EAAE59EC35878B2A',0,0,1)
-INSERT INTO tb_Book VALUES('²¼À­¸ñºìÈË¹İ','ÌÒ×ÓÏÄ',NULL,83,'2008-03','txt','9B1F593FE60E5079DC24845A8BBB2D3A',0,0,1)
-INSERT INTO tb_User VALUES('00000000',dbo.MD5('admin'),1,'³¬¼¶¹ÜÀíÔ±1',NULL,NULL,'769655297',NULL)
-INSERT INTO tb_User VALUES('00000001',dbo.MD5('admin'),1,'³¬¼¶¹ÜÀíÔ±2','levelangel@live.com',NULL,NULL,NULL)
-INSERT INTO tb_User VALUES('00000002',dbo.MD5('admin'),1,'³¬¼¶¹ÜÀíÔ±3',NULL,'15161108937',NULL,NULL)
+INSERT INTO tb_Department_A VALUES('è¶…çº§ç®¡ç†å‘˜')
+INSERT INTO tb_Department_B VALUES('æ•°å­¦éƒ¨')
+INSERT INTO tb_Department_X VALUES('è®¡ç®—æœºç³»')
+INSERT INTO tb_Role VAlUES('è¶…çº§ç®¡ç†å‘˜ç»„','A',1,'111111')
+INSERT INTO tb_Book VALUES('Effective C++ ç¬¬ä¸‰ç‰ˆï¼ˆè‹±æ–‡ï¼‰','Scott Meyers',NULL,297,'2006-07','pdf','A94069B3A7259496EAAE59EC35878B2A',0,0,1)
+INSERT INTO tb_Book VALUES('å¸ƒæ‹‰æ ¼çº¢äººé¦†','æ¡ƒå­å¤',NULL,83,'2008-03','txt','9B1F593FE60E5079DC24845A8BBB2D3A',0,0,1)
+INSERT INTO tb_User VALUES('00000000',dbo.MD5('admin'),1,'è¶…çº§ç®¡ç†å‘˜1',NULL,NULL,'769655297',NULL)
+INSERT INTO tb_User VALUES('00000001',dbo.MD5('admin'),1,'è¶…çº§ç®¡ç†å‘˜2','test@test.com',NULL,NULL,NULL)
+INSERT INTO tb_User VALUES('00000002',dbo.MD5('admin'),1,'è¶…çº§ç®¡ç†å‘˜3',NULL,'15100008937',NULL,NULL)
