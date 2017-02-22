@@ -6,7 +6,7 @@
         return;
     }
     if (!password) {
-        alert('密码不可为空！');
+        alert('密码不可为空');
         return;
     }
     var url = "/Account/Check";
