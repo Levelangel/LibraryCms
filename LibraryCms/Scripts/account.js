@@ -23,10 +23,19 @@
     }, "JSON");
 }
 
-$(function() {
+$(function () {
+    $("#account").focus();
+
     var PageHeight = $(window).height();
 
     $("#main").css("margin-top", (PageHeight - 300) / 2);
+
+    $("#password").keydown(function (e) {
+           var e = e || window.event || arguments.callee.caller.arguments[0];
+           if (e && e.keyCode == 13) {/*按下Enter*/
+               login();
+           }
+    });
 });
 
 function logout() {
