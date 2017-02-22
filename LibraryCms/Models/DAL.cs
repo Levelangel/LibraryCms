@@ -246,6 +246,10 @@ namespace LibraryCms.Models
             return book;
         }
 
+        /// <summary>
+        /// 获取推荐书籍
+        /// </summary>
+        /// <returns></returns>
         public static List<Book> GetRecomendBooks()
         {
             string sql = "select * from tb_Book order by Point DESC";
@@ -261,6 +265,16 @@ namespace LibraryCms.Models
             }
             reader.Close();
             return bookId.Select(GetBookById).ToList();
+        }
+
+        /// <summary>
+        /// 插入书籍信息
+        /// </summary>
+        /// <param name="book"></param>
+        /// <returns></returns>
+        public static int InsetrBook(Book book)
+        {
+            return 0;
         }
     }
 }
