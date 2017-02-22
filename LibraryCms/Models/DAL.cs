@@ -233,7 +233,7 @@ namespace LibraryCms.Models
                 BookId = reader["BookID"].ToString(),
                 BookName = reader["BookName"].ToString(),
                 Author = reader["Author"].ToString(),
-                Formart = reader["Formart"].ToString(),
+                Format = reader["Formart"].ToString(),
                 Publisher = reader["Publisher"].ToString(),
                 DepartmentId = reader["DepartmentId"].ToString(),
                 BookPath = reader["BookPath"].ToString(),
@@ -274,7 +274,29 @@ namespace LibraryCms.Models
         /// <returns></returns>
         public static int InsetrBook(Book book)
         {
-            return 0;
+            string sql = "insert into tb_Book values(@bookName,@author,";
+            if(book.Publisher == "")
+            {
+                sql += "NULL,";
+            }
+            else
+            {
+                sql += "@publisher,";
+            }
+            sql += "@pages,@publicTime,@format,@bookPath,@downloadNumber,@point,@departmentId)";
+            SqlParameter[] value = new SqlParameter[]{
+                new SqlParameter("@bookName",book.BookName),
+                new SqlParameter("@author",book.Author),
+                new SqlParameter("@publisher",book.Publisher),
+                new SqlParameter("@pages",book.Pages),
+                new SqlParameter("@publicTime",book.PublicTime),
+                new SqlParameter("@format",book.Format),
+                new SqlParameter("@bookPath",book.BookPath),
+                new SqlParameter("@downloadNumber",book.DownloadNumber),
+                new SqlParameter("@point",book.Point),
+                new SqlParameter("@departmentId",book.DepartmentId)
+            };
+            return SqlHelper.ExecuteCommand(sql, value);
         }
     }
 }

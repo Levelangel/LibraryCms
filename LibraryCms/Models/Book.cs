@@ -19,7 +19,7 @@ namespace LibraryCms.Models
 
         public string PublicTime { get; set; }
 
-        public string Formart { get; set; }
+        public string Format { get; set; }
 
         public string BookPath { get; set; }
 

@@ -36,11 +36,11 @@ namespace LibraryCms.Controllers
                 //clsTmp.Server = Server;
                 //Thread th = new Thread(new ThreadStart(clsTmp.SaveFile));
                 //th.Start();
-                SaveFile(savePath, postedFile);
+                //SaveFile(savePath, postedFile);
                 //string md5 = MD5.GetMD5HashFromFile(savePath);
                 //string fileName = Server.MapPath("/Upload/Books/") + md5 + Path.GetExtension(postedFile.FileName);
                 //System.IO.File.Move(savePath, fileName);
-                return Json("AJAX上传成功");
+                return Json(Request["bookName"]);
             }
             catch
             {

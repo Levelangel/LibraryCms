@@ -238,10 +238,10 @@ namespace LibraryCms.Controllers
                 return null;
             }
 
-            if (book.Formart == "pdf")
+            if (book.Format == "pdf")
             {
                 FileStream fs =
-                    System.IO.File.Open(Server.MapPath("/Upload/Books/" + book.BookPath + "." + book.Formart),
+                    System.IO.File.Open(Server.MapPath("/Upload/Books/" + book.BookPath + "." + book.Format),
                         FileMode.Open);
                 byte[] buffer = new byte[fs.Length];
                 fs.Read(buffer, 0, buffer.Length);
@@ -252,9 +252,9 @@ namespace LibraryCms.Controllers
                 System.Web.HttpContext.Current.Response.BinaryWrite(buffer);
             }
 
-            if (book.Formart == "txt")
+            if (book.Format == "txt")
             {
-                StreamReader fs = new StreamReader(Server.MapPath("/Upload/Books/" + book.BookPath + "." + book.Formart), System.Text.Encoding.Default);
+                StreamReader fs = new StreamReader(Server.MapPath("/Upload/Books/" + book.BookPath + "." + book.Format), System.Text.Encoding.Default);
                 List<string> lines = new List<string>();
                 while (fs.Peek() > 0)
                 {
@@ -279,11 +279,6 @@ namespace LibraryCms.Controllers
             try
             {
                 var postedFile = Request.Files[0];
-                //string id;
-                //if (ControllerContext.RouteData.Values["ID"] != null)
-                //{
-                //    id = ControllerContext.RouteData.Values["ID"].ToString();
-                //}
                 if (postedFile == null || postedFile.ContentLength <= 0) return Json("no file");
                 string savePath = Server.MapPath("/Upload/temp/") + postedFile.FileName + ".tmp"; //存储到临时位置
                 Cache cache = HttpRuntime.Cache;
@@ -297,6 +292,21 @@ namespace LibraryCms.Controllers
                     return Json("success");
                 }
                 System.IO.File.Move(savePath, fileName); //书籍改名
+                User user = (User)Session["User"];
+                Book book = new Book()
+                {
+                    BookName = Request["bookName"],
+                    Author = Request["author"],
+                    Publisher = Request["publisher"],
+                    PublicTime = Request["publicTime"],
+                    Format = Request["format"],
+                    BookPath = md5,
+                    DownloadNumber = 0,
+                    Point = 0,
+                    Pages = int.Parse(Request["pages"]),
+                    DepartmentId = user.Role.Department.DepartmentId
+                };
+                DAL.InsetrBook(book); //在数据库中插入书籍信息
                 return Json("success");
             }
             catch

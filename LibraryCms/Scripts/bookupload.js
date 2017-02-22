@@ -15,13 +15,25 @@ $(document).ready(function () {
 });
 
 function startUpload() {
-    strSearch = $.trim($('#bookName').val());
-    if (strSearch == null || strSearch == "") {
+    strSearch = $.trim($('#filenameText').text());
+    if (strSearch == "未选择任何文件") {
         dialog.worning("未选择任何文件，请先选择要上传的书籍", "提示");
         return;
     }
     if ($('input[name="bookName"]').val() == "") {
-        $("#status").text("书籍名称为空");
+        $("#status").text("书籍名称不能为空");
+        return;
+    }
+    if ($('input[name="author"]').val() == "") {
+        $("#status").text("作者名不能为空");
+        return;
+    }
+    if ($('input[name="pages"]').val() == "") {
+        $("#status").text("书籍页数不能为空");
+        return;
+    }
+    if ($('#format').val() == "") {
+        $("#status").text("格式不能为空");
         return;
     }
     var url = "/Admin/GetBook";
@@ -38,6 +50,17 @@ function startUpload() {
 function fileUpload(file) {
     var params = new FormData();
     params.append("tpUploadFile", file);
+    params.append("bookName", $('input[name="bookName"]').val());
+    params.append("author", $('input[name="author"]').val());
+    params.append("publisher", $('input[name="publisher"]').val());
+    params.append("pages", $('input[name="pages"]').val());
+    if ($('input[name="publicTime"]').val() == "") {
+        var date = new Date();
+        params.append("publicTime", date.getFullYear() + "-" + date.getMonth() + 1);
+    } else {
+        params.append("publicTime", $('input[name="publicTime"]').val());
+    }  
+    params.append("format", ($('#format').val() == "txt" || $('#format').val() == "pdf") ? $('#format').val() : "txt");
     $.ajax({
         type: "POST",
         url: "/Admin/AjaxUpload",

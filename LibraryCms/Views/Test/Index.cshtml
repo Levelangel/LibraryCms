@@ -13,6 +13,8 @@
     <div class="container">
         <div class="row">
             <input id="file" name="file" type="file" />
+            <input type="month" name="month" value="" />
+            <input type="button" name="name" value="GetTime" onclick="GetTime();" />
             <a href="javascript:;" onclick="testUpload();">Upload</a>
         </div>
         <div id="percent">
@@ -22,6 +24,10 @@
     </div>
     @Scripts.Render("~/Scripts/jquery")
     <script type="text/javascript">
+        function GetTime() {
+            alert($('input[name="month"]').val());
+        }
+
     function testUpload() {
         var params = new FormData();
         $("#percent").text("正在准备数据...");
@@ -30,6 +36,7 @@
             return;
         }
         params.append("testFile", document.getElementById("file").files[0]);
+        params.append("bookName", "TestBookName");
         console.log(params);
         $.ajax({
             type: "POST",
