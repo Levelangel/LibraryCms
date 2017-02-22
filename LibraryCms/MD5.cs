@@ -38,7 +38,7 @@ namespace LibraryCms
                 {
                     sb.Append(retVal[i].ToString("x2"));
                 }
-                return sb.ToString();
+                return sb.ToString().ToUpper();
             }
             catch (Exception ex)
             {
