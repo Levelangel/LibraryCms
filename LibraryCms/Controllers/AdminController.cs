@@ -278,7 +278,12 @@ namespace LibraryCms.Controllers
         {
             try
             {
-                var postedFile = Request.Files[0];  
+                var postedFile = Request.Files[0];
+                //string id;
+                //if (ControllerContext.RouteData.Values["ID"] != null)
+                //{
+                //    id = ControllerContext.RouteData.Values["ID"].ToString();
+                //}
                 if (postedFile == null || postedFile.ContentLength <= 0) return Json("no file");
                 string savePath = Server.MapPath("/Upload/temp/") + postedFile.FileName + ".tmp"; //存储到临时位置
                 Cache cache = HttpRuntime.Cache;
@@ -286,6 +291,11 @@ namespace LibraryCms.Controllers
                 SaveFile(savePath, postedFile);
                 string md5 = MD5.GetMD5HashFromFile(savePath); //计算书籍MD5
                 string fileName = Server.MapPath("/Upload/Books/") + md5 + Path.GetExtension(postedFile.FileName);
+                if (System.IO.File.Exists(fileName)) //文件存在时
+                {
+                    System.IO.File.Delete(savePath);//删除临时文件
+                    return Json("success");
+                }
                 System.IO.File.Move(savePath, fileName); //书籍改名
                 return Json("success");
             }
@@ -311,7 +321,8 @@ namespace LibraryCms.Controllers
             return Json(cache["uploadStatus"]);
         }
 
-        private void SaveFile(string savePath, HttpPostedFileBase file){
+        private void SaveFile(string savePath, HttpPostedFileBase file)
+        {
             Cache cache = HttpRuntime.Cache;
             FileStream fs = new FileStream(savePath, FileMode.Create);
             BinaryWriter bw = new BinaryWriter(fs);
@@ -334,5 +345,4 @@ namespace LibraryCms.Controllers
             br.Close();
         }
     }
-    
 }
