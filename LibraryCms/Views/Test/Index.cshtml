@@ -24,6 +24,11 @@
     <script type="text/javascript">
     function testUpload() {
         var params = new FormData();
+        $("#percent").text("正在准备数据...");
+        if (document.getElementById("file").files[0] == null) {
+            $("#percent").text("没有选择文件");
+            return;
+        }
         params.append("testFile", document.getElementById("file").files[0]);
         console.log(params);
         $.ajax({
@@ -50,6 +55,9 @@
                     if (percent == "100") {
                         clearInterval(timer);
                         $("#percent").text("100%");
+                        return;
+                    }
+                    if (percent == "0") {
                         return;
                     }
                     $("#percent").text(percent.toFixed(2) + "%");

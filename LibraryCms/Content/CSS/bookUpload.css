@@ -54,6 +54,18 @@
     color:#ccc;
 }
 
+.filename > span:not(:last-of-type) {
+    display:inline-block;
+    position:absolute;
+    height: 40px;
+    width:0px;/*max-width:520px*/
+    top: 4px;
+    left: 0px;
+    border-radius: 4px;
+    background-color:#5FBB39;
+    z-index:-1;
+}
+
 .filenamehover,
 .filename:hover {
     border:solid 1px #5FBB39;
