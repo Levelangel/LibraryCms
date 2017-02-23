@@ -354,5 +354,23 @@ namespace LibraryCms.Controllers
             bw.Close();
             br.Close();
         }
+
+        [HttpPost]
+        public ActionResult GetRights()
+        {
+            User user = (User)Session["user"];
+            if( user == null )
+            {
+                return Json("need login");
+            }
+            string rights = user.Role.Rights;
+            string tmp = "";
+            for (int i = 0; i < rights.Length; i++ )
+            {
+                tmp += rights[i] + "|";
+            }
+            tmp = tmp.Substring(0, tmp.Length - 1);
+            return Json(tmp);
+        }
     }
 }
