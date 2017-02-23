@@ -89,6 +89,22 @@
     list-style-type:none;
 }
 
+.display{
+    display:none !important;
+}
+
+#result .add {
+    margin-bottom:20px;
+    border: solid 1px #ccc;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-family: "Microsoft YaHei";
+    position: relative;
+    filter:alpha(opacity=0); 
+    -moz-opacity:0; 
+    opacity:0;
+}
+
 #result ul li {
     display: block;
     margin-bottom:20px;
@@ -98,7 +114,7 @@
     font-family: "Microsoft YaHei";
     position: relative;
 }
-
+#result .add a,
 #result ul li a {
     display: inline-block;
     text-decoration: none;
@@ -118,12 +134,12 @@
     margin-left:20px;
     margin-top:7px;
 }
-
+#result .add a:hover,
 #result ul li a:hover {
     color:#fff;
     background-color:#5FBB39;
 }
-
+#result .add span,
 #result ul li span {
     display: inline-block;
     height: 45px;
@@ -132,10 +148,21 @@
     width:160px;
 }
 
-#result ul li input {
-    
+#result .add input[type=text] {
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    margin:1px 30px 1px 0;
+    width:160px;
+    border:solid 1px #ccc;
+    outline-color: #5FBB39;
+    border-radius:4px;
+    padding-left:20px;
 }
 
+#result .add .RadioA,
+#result .add .RadioX,
+#result .add .RadioB,
 #result ul li .RadioA,
 #result ul li .RadioX,
 #result ul li .RadioB {
