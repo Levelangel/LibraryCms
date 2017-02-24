@@ -298,5 +298,30 @@ namespace LibraryCms.Models
             };
             return SqlHelper.ExecuteCommand(sql, value);
         }
+
+        /// <summary>
+        /// 添加系部信息
+        /// </summary>
+        /// <param name="dept"></param>
+        /// <returns></returns>
+        public static int InsertDepartment(Department dept)
+        {
+            string sql = "insert into tb_Department_";
+            switch (dept.DepartmentType)
+            {
+                case DepartmentType.X:
+                    sql += "X";
+                    break;
+                case DepartmentType.B:
+                    sql += "B";
+                    break;
+                case DepartmentType.A:
+                    sql += "A";
+                    break;
+            }
+            sql += " valuse(@departmentName)";
+            SqlParameter value = new SqlParameter("@departmentName",dept.DepartmentName);
+            return SqlHelper.ExecuteCommand(sql, value);
+        }
     }
 }

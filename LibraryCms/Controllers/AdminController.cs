@@ -276,6 +276,10 @@ namespace LibraryCms.Controllers
         [HttpPost]
         public ActionResult AjaxUpload() //书籍上传Ajax接受地址
         {
+            if (Session["isLogin"] == null || Session["isLogin"].ToString() == "False")
+            {
+                return null;
+            }
             try
             {
                 var postedFile = Request.Files[0];
@@ -371,6 +375,15 @@ namespace LibraryCms.Controllers
             }
             tmp = tmp.Substring(0, tmp.Length - 1);
             return Json(tmp);
+        }
+
+        [HttpPost]
+        public ActionResult AddDepartment()
+        {
+            string DepartmentName = Request["DepartmentName"];
+            string DepartmentType = Request["DepartmentType"];
+
+            return Json("");
         }
     }
 }
