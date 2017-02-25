@@ -23,7 +23,7 @@
                 if (obj.DepartmentType === 1) {
                     tmpStr += 'checked="checked"';
                 }
-                tmpStr += '/>部<input class="RadioA" value="X" name="Department' + i + '" type="radio"';
+                tmpStr += '/>部<input class="RadioA" value="A" name="Department' + i + '" type="radio"';
                 if (obj.DepartmentType === 2) {
                     tmpStr += 'checked="checked"';
                 }
@@ -174,6 +174,12 @@ function modifyDept(event) {
     var li = event.target.parentNode;
     var span = li.getElementsByTagName('span')[0];
     oriDeptName = span.innerText;
+    var rbuttons = li.getElementsByTagName('input');
+    for (var j = 0; j < rbuttons.length; j++) {
+        if (rbuttons[j].nodeName = "INPUT" && rbuttons[j].checked) {
+            oriDeptType = rbuttons[j].value;
+        }
+    }
     span.innerHTML = '<input type="text" name="deptNameToModify" value="' + oriDeptName + '" placeholder="部门名称" />';
     li.getElementsByTagName('a')[0].onclick = cancelModifyDept;//right
     li.getElementsByTagName('a')[0].innerText = "取消";
@@ -240,13 +246,32 @@ function cancelModifyDept(event) {
     modifyStatus = false;
 }
 
-function checkModifyDept() {
+function checkModifyDept() { //确认修改部门
+
     var result = document.getElementById('result');
     var ul = result.getElementsByTagName('ul')[0];
     var li = event.target.parentNode;
     var span = li.getElementsByTagName('span')[0];
+    var deptName = span.getElementsByTagName('input')[0].value;
     span.innerHTML = '';
-    span.innerText = oriDeptName;
+    var rbuttons = li.getElementsByTagName('input');
+    var deptType = '';
+    for (var j = 0; j < rbuttons.length; j++) {
+        if (rbuttons[j].nodeName = "INPUT" && rbuttons[j].checked) {
+            deptType = rbuttons[j].value;
+        }
+    }
+    span.innerText = deptName;
+    var url = '/Admin/ModifyDepartment';
+    var data = { "oriDeptName": oriDeptName, "oriDeptType": oriDeptType, "deptName": deptName, "deptType": deptType };
+    $.post(url, data, function (res) {
+        if (res == "success") {
+            dialog.success("部门修改成功");
+        }
+        else {
+            dialog.error("部门修改失败，原因是：" + res, "出错啦");
+        }
+    },"JSON");
     li.getElementsByTagName('a')[0].onclick = modifyDept;//right
     li.getElementsByTagName('a')[0].innerText = "修改";
     li.getElementsByTagName('a')[1].onclick = deleteDept; //left

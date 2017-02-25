@@ -451,10 +451,80 @@ namespace LibraryCms.Controllers
                     dept.DepartmentType = DepartmentType.X;
                     break;
                 default:
-                    return Json("error");
+                    return Json("department type incorrect");
             }
             int t = DAL.DeleteDepartment(dept);
-            return (t == 0) ? Json("error") : Json("success");
+            return (t == 0) ? Json("sql error") : Json("success");
+        }
+
+        public ActionResult ModifyDepartment()
+        {
+            if (Session["isLogin"] == null || Session["isLogin"].ToString() == "False")
+            {
+                return Json("need login");
+            }
+            User user = (User)Session["User"];
+            string right = user.Role.Rights;
+            if (right[5] != '1')
+            {
+                return Json("No Rights");
+            }
+            string deptName = Request["deptName"];
+            string deptType = Request["deptType"];
+            string oriDeptName = Request["oriDeptName"];
+            string oriDeptType = Request["oriDeptType"];
+            Department dept = new Department()
+            {
+                DepartmentName = deptName
+            };
+            switch (deptType)
+            {
+                case "A":
+                    dept.DepartmentType = DepartmentType.A;
+                    break;
+
+                case "B":
+                    dept.DepartmentType = DepartmentType.B;
+                    break;
+
+                case "X":
+                    dept.DepartmentType = DepartmentType.X;
+                    break;
+                default:
+                    return Json("department type incorrect");
+            }
+            Department oriDept = new Department()
+            {
+                DepartmentName = oriDeptName
+            };
+            switch (oriDeptType)
+            {
+                case "A":
+                    oriDept.DepartmentType = DepartmentType.A;
+                    break;
+
+                case "B":
+                    oriDept.DepartmentType = DepartmentType.B;
+                    break;
+
+                case "X":
+                    oriDept.DepartmentType = DepartmentType.X;
+                    break;
+                default:
+                    return Json("department type incorrect");
+            }
+
+            int t = DAL.DeleteDepartment(oriDept);
+            if (t == 0)
+            {
+                return Json("sql error");
+            }
+            t = DAL.InsertDepartment(dept);
+            if (t == 0)
+            {
+                return Json("sql error");
+            }
+            return Json("success");
         }
     }
 }
