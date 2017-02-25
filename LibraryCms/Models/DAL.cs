@@ -319,7 +319,7 @@ namespace LibraryCms.Models
                     sql += "A";
                     break;
             }
-            sql += " valuse(@departmentName)";
+            sql += " values(@departmentName)";
             SqlParameter value = new SqlParameter("@departmentName",dept.DepartmentName);
             return SqlHelper.ExecuteCommand(sql, value);
         }

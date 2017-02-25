@@ -380,10 +380,32 @@ namespace LibraryCms.Controllers
         [HttpPost]
         public ActionResult AddDepartment()
         {
-            string DepartmentName = Request["DepartmentName"];
-            string DepartmentType = Request["DepartmentType"];
+            string departmentName = Request["DepartmentName"];
+            string departmentType = Request["DepartmentType"];
 
-            return Json("");
+            Department dept = new Department()
+            {
+                DepartmentName = departmentName
+            };
+            switch (departmentType)
+            {
+                case "A":
+                    dept.DepartmentType = DepartmentType.A;
+                    break;
+
+                case "B":
+                    dept.DepartmentType = DepartmentType.B;
+                    break;
+
+                case "X":
+                    dept.DepartmentType = DepartmentType.X;
+                    break;
+
+                default:
+                    return Json("error");
+            }
+            int t = DAL.InsertDepartment(dept);
+            return (t == 0)?Json("error"):Json("success");
         }
     }
 }
