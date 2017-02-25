@@ -26,7 +26,9 @@
                     location.href = url;
                 } else {
                     layer.close(index);
-                    functionYes();
+                    if (functionYes != null) {
+                        functionYes();
+                    }
                 }
             }
         });
@@ -36,6 +38,23 @@
 			message,
 			{
 			    icon: 3,
+			    title: (title != null && title !== '') ? title : "信息"
+			},
+			function (index) {
+			    funtionYes();
+			    layer.close(index);
+			},
+			function () {
+			    functionNo();
+			}
+		);
+    },
+    worning_question: function (message, title, funtionYes, functionNo) {
+        layer.confirm(
+			message,
+			{
+			    icon: 0,
+			    shift: 0,
 			    title: (title != null && title !== '') ? title : "信息"
 			},
 			function (index) {

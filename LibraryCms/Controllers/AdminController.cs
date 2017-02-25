@@ -380,6 +380,16 @@ namespace LibraryCms.Controllers
         [HttpPost]
         public ActionResult AddDepartment()
         {
+            if (Session["isLogin"] == null || Session["isLogin"].ToString() == "False")
+            {
+                return Json("need login");
+            }
+            User user = (User)Session["User"];
+            string right = user.Role.Rights;
+            if (right[5] != '1')
+            {
+                return Json("No Rights");
+            }
             string departmentName = Request["DepartmentName"];
             string departmentType = Request["DepartmentType"];
 
@@ -406,6 +416,45 @@ namespace LibraryCms.Controllers
             }
             int t = DAL.InsertDepartment(dept);
             return (t == 0)?Json("error"):Json("success");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteDepartment()
+        {
+            if (Session["isLogin"] == null || Session["isLogin"].ToString() == "False")
+            {
+                return Json("need login");
+            }
+            User user = (User)Session["User"];
+            string right = user.Role.Rights;
+            if (right[5] != '1')
+            {
+                return Json("No Rights");
+            }
+            string departmentName = Request["DepartmentName"];
+            string departmentType = Request["DepartmentType"];
+            Department dept = new Department()
+            {
+                DepartmentName = departmentName
+            };
+            switch (departmentType)
+            {
+                case "A":
+                    dept.DepartmentType = DepartmentType.A;
+                    break;
+
+                case "B":
+                    dept.DepartmentType = DepartmentType.B;
+                    break;
+
+                case "X":
+                    dept.DepartmentType = DepartmentType.X;
+                    break;
+                default:
+                    return Json("error");
+            }
+            int t = DAL.DeleteDepartment(dept);
+            return (t == 0) ? Json("error") : Json("success");
         }
     }
 }

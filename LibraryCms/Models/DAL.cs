@@ -323,5 +323,25 @@ namespace LibraryCms.Models
             SqlParameter value = new SqlParameter("@departmentName",dept.DepartmentName);
             return SqlHelper.ExecuteCommand(sql, value);
         }
+
+        public static int DeleteDepartment(Department dept)
+        {
+            string sql = "delete from tb_Department_";
+            switch (dept.DepartmentType)
+            {
+                case DepartmentType.X:
+                    sql += "X";
+                    break;
+                case DepartmentType.B:
+                    sql += "B";
+                    break;
+                case DepartmentType.A:
+                    sql += "A";
+                    break;
+            }
+            sql += " where DepartmentName=@deptName";
+            SqlParameter value = new SqlParameter("@deptName", dept.DepartmentName);
+            return SqlHelper.ExecuteCommand(sql, value);
+        }
     }
 }

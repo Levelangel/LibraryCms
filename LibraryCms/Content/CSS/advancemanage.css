@@ -147,7 +147,7 @@
     margin-right:50px;
     width:160px;
 }
-
+#result ul li span input[type=text],
 #result .add input[type=text] {
     display: inline-block;
     height: 40px;

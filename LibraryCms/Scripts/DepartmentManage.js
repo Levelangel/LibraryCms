@@ -15,21 +15,29 @@
                 var obj = strToJson(resArr[i]); //Json字符串转Json对象
                 var tmpStr = '';
                 tmpStr += '<li><span>' + obj.DepartmentName + '</span>属于：';
-                tmpStr += '<input class="RadioX" name="Department' + i + '" type="radio"';
+                tmpStr += '<input class="RadioX" value="X" name="Department' + i + '" type="radio"';
                 if (obj.DepartmentType === 0) {
                     tmpStr += 'checked="checked"';
                 }
-                tmpStr += '/>系<input class="RadioB" name="Department' + i + '" type="radio"';
+                tmpStr += '/>系<input class="RadioB" value="B" name="Department' + i + '" type="radio"';
                 if (obj.DepartmentType === 1) {
                     tmpStr += 'checked="checked"';
                 }
-                tmpStr += '/>部<input class="RadioA" name="Department' + i + '" type="radio"';
+                tmpStr += '/>部<input class="RadioA" value="X" name="Department' + i + '" type="radio"';
                 if (obj.DepartmentType === 2) {
                     tmpStr += 'checked="checked"';
                 }
-                tmpStr += '/>管理员<a href="javascript:;">修改</a><a href="javascript:;">删除</a></li>';
+                tmpStr += '/>管理员<a name="btnRight" href="javascript:;">修改</a>';
+                tmpStr += '<a name="btnLeft" href="javascript:;">删除</a></li>';
                 ul.innerHTML += tmpStr;
+                
             }
+            for (var i = 0; i < resArr.length; i++) {
+                var li = ul.getElementsByTagName("li")[i];
+                li.getElementsByTagName("a")[0].onclick = modifyDept;//right
+                li.getElementsByTagName("a")[1].onclick = deleteDept;//left
+            }
+            
         } else {
             if (res === "") { //没有查找到结果
                 dialog.worning('没有查找到符合的结果！');
@@ -150,5 +158,98 @@ function cancelAdd() {
             $('input[name = "DepartmentName"]').val("");
         }
     }, 50);
+}
 
+var oriDeptName = '';
+var oriDeptType = '';
+var modifyStatus = false;
+function modifyDept(event) {
+    if (modifyStatus == true) {
+        dialog.worning("请先完成上一个修改", "提醒");
+        return;
+    }
+    modifyStatus = true;
+    var result = document.getElementById('result');
+    var ul = result.getElementsByTagName('ul')[0];
+    var li = event.target.parentNode;
+    var span = li.getElementsByTagName('span')[0];
+    oriDeptName = span.innerText;
+    span.innerHTML = '<input type="text" name="deptNameToModify" value="' + oriDeptName + '" placeholder="部门名称" />';
+    li.getElementsByTagName('a')[0].onclick = cancelModifyDept;//right
+    li.getElementsByTagName('a')[0].innerText = "取消";
+    li.getElementsByTagName('a')[1].onclick = checkModifyDept; //left
+    li.getElementsByTagName('a')[1].innerText = "保存";
+}
+
+function deleteDept(event) {
+    dialog.worning_question("正在进行的操作将是不可逆的，确定要继续吗？", "警告",
+        function yes() {
+            var url = '/Admin/DeleteDepartment';
+            var li = event.target.parentNode;
+            var span = li.getElementsByTagName('span')[0];
+            var deptName = span.innerText;
+            var rbuttons = li.getElementsByTagName('input');
+            var deptType = '';
+            for (var j = 0; j < rbuttons.length; j++) {
+                if (rbuttons[j].nodeName = "INPUT" && rbuttons[j].checked) {
+                    deptType = rbuttons[j].value;
+                }
+            }
+            var data = { "DepartmentName": deptName, "DepartmentType": deptType };
+            $.post(url, data, function (res) {
+                if (res == "success") {
+                    dialog.success("部门删除成功");
+                    var i = 1;
+                    var time = setInterval(function () {
+                        $(li).css("opacity", i);
+                        $(li).css("filter", 'alpha(opacity = ' + i * 100 + ')');
+                        $(li).css("-moz-opacity", i);
+                        i -= 0.2;
+                        if (i <= 0) {
+                            clearInterval(time);
+                            $(li).css("opacity", 0);
+                            $(li).css("filter", 'alpha(opacity = 0)');
+                            $(li).css("-moz-opacity", 0);
+                            $(li).addClass("display");
+                            $(li).remove();
+                        }
+                    }, 50);
+                }
+                else {
+                    dialog.error("部门删除失败，原因是：" + res,"出错啦");
+                }
+            },"JSON");
+        },
+        function no() {
+            return;
+        }
+    );
+}
+
+function cancelModifyDept(event) {
+    var result = document.getElementById('result');
+    var ul = result.getElementsByTagName('ul')[0];
+    var li = event.target.parentNode;
+    var span = li.getElementsByTagName('span')[0];
+    span.innerHTML = '';
+    span.innerText = oriDeptName;
+    li.getElementsByTagName('a')[0].onclick = modifyDept;//right
+    li.getElementsByTagName('a')[0].innerText = "修改";
+    li.getElementsByTagName('a')[1].onclick = deleteDept; //left
+    li.getElementsByTagName('a')[1].innerText = "删除";
+    modifyStatus = false;
+}
+
+function checkModifyDept() {
+    var result = document.getElementById('result');
+    var ul = result.getElementsByTagName('ul')[0];
+    var li = event.target.parentNode;
+    var span = li.getElementsByTagName('span')[0];
+    span.innerHTML = '';
+    span.innerText = oriDeptName;
+    li.getElementsByTagName('a')[0].onclick = modifyDept;//right
+    li.getElementsByTagName('a')[0].innerText = "修改";
+    li.getElementsByTagName('a')[1].onclick = deleteDept; //left
+    li.getElementsByTagName('a')[1].innerText = "删除";
+    modifyStatus = false;
 }
