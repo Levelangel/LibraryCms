@@ -73,20 +73,28 @@ namespace LibraryCms.Models
         /// <returns></returns>
         public static string Decrypt(string pToDecrypt, string sKey)
         {
-            DESCryptoServiceProvider des = new DESCryptoServiceProvider();
-            byte[] inputByteArray = new byte[pToDecrypt.Length / 2];
-            for (int x = 0; x < pToDecrypt.Length / 2; x++)
+            try
             {
-                int i = (Convert.ToInt32(pToDecrypt.Substring(x * 2, 2), 16));
-                inputByteArray[x] = (byte)i;
+                DESCryptoServiceProvider des = new DESCryptoServiceProvider();
+                byte[] inputByteArray = new byte[pToDecrypt.Length / 2];
+                for (int x = 0; x < pToDecrypt.Length / 2; x++)
+                {
+                    int i = (Convert.ToInt32(pToDecrypt.Substring(x * 2, 2), 16));
+                    inputByteArray[x] = (byte)i;
+                }
+                des.Key = Encoding.UTF8.GetBytes(sKey);
+                des.IV = Encoding.UTF8.GetBytes(sKey);
+                MemoryStream ms = new MemoryStream();
+                CryptoStream cs = new CryptoStream(ms, des.CreateDecryptor(), CryptoStreamMode.Write);
+                cs.Write(inputByteArray, 0, inputByteArray.Length);
+                cs.FlushFinalBlock();
+                return Encoding.UTF8.GetString(ms.ToArray());
             }
-            des.Key = Encoding.UTF8.GetBytes(sKey);
-            des.IV = Encoding.UTF8.GetBytes(sKey);
-            MemoryStream ms = new MemoryStream();
-            CryptoStream cs = new CryptoStream(ms, des.CreateDecryptor(), CryptoStreamMode.Write);
-            cs.Write(inputByteArray, 0, inputByteArray.Length);
-            cs.FlushFinalBlock();
-            return Encoding.UTF8.GetString(ms.ToArray());
+            catch (Exception)
+            {
+                return "";
+            }
+
         }
 
     }

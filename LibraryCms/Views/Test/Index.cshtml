@@ -15,7 +15,7 @@
             <input id="file" name="file" type="file" />
             <input type="month" name="month" value="" />
             <input type="button" name="name" value="GetTime" onclick="GetTime();" />
-            <a href="javascript:;" onclick="testUpload();">Upload</a>
+            <a href="javascript:;" onclick="SendMessage()">Send Message</a>
         </div>
         <div id="percent">
             0.00%
@@ -28,54 +28,11 @@
             alert($('input[name="month"]').val());
         }
 
-    function testUpload() {
-        var params = new FormData();
-        $("#percent").text("正在准备数据...");
-        if (document.getElementById("file").files[0] == null) {
-            $("#percent").text("没有选择文件");
-            return;
+        function SendMessage() {
+            $.post("/Account/SendCheckMessage", null, function () {
+
+            });
         }
-        params.append("testFile", document.getElementById("file").files[0]);
-        params.append("bookName", "TestBookName");
-        console.log(params);
-        $.ajax({
-            type: "POST",
-            url: "/Test/AjaxUpload",
-            data: params,
-            contentType: false,
-            processData: false,
-            success: function (result) {
-                console.log(result);
-            },
-            error: function () {
-                alert("Error");
-            },
-            dataType:'json'
-        });
-        var timer = setInterval(function () {
-            $.ajax({
-                url: '/Test/AjaxUploadPersent',
-                type: 'POST',
-                success: function (percent) {
-                    console.log("Percent=" + percent);
-                    
-                    if (percent == "100") {
-                        clearInterval(timer);
-                        $("#percent").text("100%");
-                        return;
-                    }
-                    if (percent == "0") {
-                        return;
-                    }
-                    $("#percent").text(percent.toFixed(2) + "%");
-                },
-                error: function () {
-                    clearInterval(timer);
-                    console.log("Percent Error");
-                }
-            })
-        }, 500);
-    }
     </script>
 </body>
 </html>

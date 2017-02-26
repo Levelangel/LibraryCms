@@ -1,0 +1,60 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    @Scripts.Render("~/Scripts/jquery")
+    @Scripts.Render("~/Scripts/js-layer")
+    @Scripts.Render("~/Scripts/js-updatemail")
+    <style>
+        #newMail{
+            width:590px;
+            text-align:center;
+            font-family:"Microsoft YaHei";
+            padding-top:50px;
+        }
+        #newMail input{
+            height:40px;
+            font-size:16px;
+            width: 380px;
+            line-height:40px;
+            outline-color: #5FBB39;
+            border:1px solid #ccc;
+            padding-left:30px;
+            margin-left:20px;
+            border-radius:4px;
+        }
+        #newMail a {
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            width:500px;
+            height:40px;
+            line-height:40px;
+            border:solid 1px #5FBB39;
+            color: #5FBB39;
+            border-radius:4px;
+            transition: all linear 0.2s;
+            -o-transition: all linear 0.2s;
+            -ms-transition: all linear 0.2s;
+            -webkit-transition: all linear 0.2s;
+            -moz-transition: all linear 0.2s;
+            margin:30px auto;
+        }
+        #newMail a:hover {
+            color:#fff;
+            background-color:#5FBB39;
+        }
+    </style>
+</head>
+<body>
+    <div id="newMail">
+        <span>新邮箱：</span><input type="email" name="mail" value="" />
+        <a href="javascript:;">保存</a>
+    </div>
+</body>
+</html>

@@ -41,7 +41,12 @@ $(function () {
         var a = ul.getElementsByTagName("a")[0];
         a.onclick = updateUserInfo;
     }
-
+    ul = document.getElementById("safety");
+    if (ul != null) {
+        var li = ul.getElementsByClassName("pic-mail")[0];
+        var btn_a = li.getElementsByTagName("a")[0];
+        btn_a.onclick = updateMail;
+    }
 });
 
 function logout() {
@@ -83,4 +88,15 @@ function updateUserInfo() {
             dialog.error("更新个人信息失败，错误原因为：" + res,"出错啦");
         }
     },"JSON");
+}
+
+function updateMail() {
+    layer.open({
+        type: 2,
+        title: '更新邮箱',
+        shadeClose: true,
+        shade: 0.7,
+        area: ['600px', '300px'],
+        content: '/Account/UpdateMail'
+    });
 }
