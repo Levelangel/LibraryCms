@@ -43,34 +43,40 @@ namespace LibraryCms.Models
 
         public User(string info)
         {
-            string final = info.ToLower();
-            string key = final.Substring(final.Length - 8, 8);
-            string toDecode = final.Substring(0, final.Length - 8);
-            string first = Check.Decrypt(toDecode, key);
-            string[] str = first.Split('→');
-
-            string strGuid = str[5];
-            string time = str[4];
-            if (strGuid.Substring(0, 8) != key)
+            try
+            {
+                string final = info.ToLower();
+                string key = final.Substring(final.Length - 8, 8);
+                string toDecode = final.Substring(0, final.Length - 8);
+                string first = Check.Decrypt(toDecode, key);
+                string[] str = first.Split('→');
+                string strGuid = str[5];
+                string time = str[4];
+                if (strGuid.Substring(0, 8) != key)
+                {
+                    UserID = "Incorrect Data";
+                    return;
+                }
+                long timeOver = DateTime.Now.Ticks - long.Parse(time);
+                DateTime nowTime = new DateTime(timeOver);
+                //30分钟之内有效
+                if (nowTime.Year == 1 && nowTime.Month == 1 && nowTime.Day == 1 && nowTime.Hour == 0 && nowTime.Minute < 30)
+                {
+                    UserID = str[0];
+                    Mail = str[1];
+                    Phone = str[2];
+                    QQ = str[3];
+                }
+                else
+                {
+                    UserID = "Time Out";
+                }
+            }
+            catch (Exception)
             {
                 UserID = "Incorrect Data";
                 return;
             }
-            long timeOver = DateTime.Now.Ticks - long.Parse(time);
-            DateTime nowTime = new DateTime(timeOver);
-            //30分钟之内有效
-            if (nowTime.Year == 1 && nowTime.Month == 1 && nowTime.Day == 1 && nowTime.Hour == 0 && nowTime.Minute < 30)
-            {
-                UserID = str[0];
-                Mail = str[1];
-                Phone = str[2];
-                QQ = str[3];
-            }
-            else
-            {
-                UserID = "Time Out";
-            }
-
         }
         public User()
         {

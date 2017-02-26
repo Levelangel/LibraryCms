@@ -88,6 +88,51 @@ namespace LibraryCms.Controllers
             bw.Close();
             br.Close();
         }
+
+        public JsonResult SendMessage()
+        {
+            Models.User user = new Models.User();
+            user.Mail = "levelangel@live.com";
+            string htmlBody = "<!DOCTYPE html>";
+            htmlBody += "<html>";
+            htmlBody += "<head>";
+            htmlBody += "<meta charset='utf-8'>";
+            htmlBody += "<meta http-equiv='X-UA-Compatible' content='IE=edge'>";
+            htmlBody += "<title></title>";
+            htmlBody += "<style>";
+            htmlBody += @"td span{color:#f16524;}";
+            htmlBody += "</style>";
+            htmlBody += "</head>";
+            htmlBody += "<body>";
+            htmlBody += "<h3>您的信息即将修改！以下是您的最终信息：</h3>";
+            htmlBody += "<table>";
+            htmlBody += "<tr>";
+            htmlBody += string.Format("<td>邮箱地址：</td><td><span>{0}</span></td>", user.Mail);
+            htmlBody += "</tr>";
+            htmlBody += "<tr>";
+            htmlBody += string.Format("<td>手机号码：</td><td><span>{0}</span></td>", user.Phone);
+            htmlBody += "</tr>";
+            htmlBody += "<tr>";
+            htmlBody += string.Format("<td>QQ号码：</td><td><span>{0}</span></td>", user.QQ);
+            htmlBody += "</tr>";
+            htmlBody += "</table>";
+            htmlBody += "<h4>请单击以下链接确认您的修改：</h4>";
+            string url = Request.Url.ToString();
+            string action = RouteData.Values["action"].ToString();
+            string handleAction = "HandleMail/";
+            url = url.Substring(0, url.Length - action.Length);
+            url += handleAction;
+            htmlBody += string.Format("<a href='{0}'>确认修改</a>", url + user.ToString());
+            htmlBody += "<p></p>";
+            htmlBody += string.Format("<p>{0}</p>", DateTime.Now);
+            htmlBody += "<p></p>";
+            htmlBody += "</body>";
+            htmlBody += "</html>";
+            //htmlBody = string.Format(htmlBody, user.Mail, user.Phone, user.QQ, Request.Url, DateTime.Now);
+            Mail.SnedMsgTo(user.Mail, "信息修改确认", htmlBody, true);
+            //Response.Write(htmlBody);
+            return Json("ok");
+        }
     }
 
     //public class clsSaveFile

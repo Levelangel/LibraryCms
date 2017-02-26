@@ -136,6 +136,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mail.cs" />
     <Compile Include="MD5.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Check.cs" />
@@ -228,6 +229,8 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\updateMail.js" />
+    <Content Include="Scripts\updatepassword.js" />
     <Content Include="Scripts\UserManage.js" />
     <Content Include="Scripts\_Layout.js" />
     <Content Include="Scripts\_references.js" />
@@ -295,6 +298,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Admin\ReadBook.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\WrongId.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\CheckInfo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\UpdateMail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\UpdatePassword.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

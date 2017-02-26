@@ -19,14 +19,14 @@
 
 <ul id="personalinfo">
     <li><span>账号：</span>@{if (user == null){Write("");}else {Write(user.Number);}}</li>
-    <li><span>姓名：</span><input type="text" value="@user.Name" /></li>
+    <li><span>姓名：</span><input type="text" name="name" value="@user.Name" /></li>
     <li>
         <span>性别：</span>
-        <input id="RadioMan" name="sex" type="radio" @(user.Sex == "男" ? "checked=\"checked\"" : "")/>男
-        <input id="RadioWoman" name="sex" type="radio" @(user.Sex == "女" ? "checked=\"checked\"" : "")/>女
+        <input id="RadioMan" name="sex" value="M" type="radio" @(user.Sex == "M" ? "checked=\"checked\"" : "")/>男
+        <input id="RadioWoman" name="sex" value="W" type="radio" @(user.Sex == "W" ? "checked=\"checked\"" : "")/>女
     </li>
     <li><span>邮箱：</span>@(user.Mail == "" ? "未绑定" : user.Mail)</li>
     <li><span>手机号码：</span>@(user.Phone == ""?"未绑定":user.Phone)</li>
-    <li><span>QQ号码：</span><input type="text" value="@user.QQ"/></li>
+    <li><span>QQ号码：</span><input type="text" name="QQ" value="@user.QQ"/></li>
     <li><span></span><a href="javascript:;">保存修改</a></li>
 </ul>

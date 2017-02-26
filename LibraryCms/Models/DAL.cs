@@ -343,5 +343,54 @@ namespace LibraryCms.Models
             SqlParameter value = new SqlParameter("@deptName", dept.DepartmentName);
             return SqlHelper.ExecuteCommand(sql, value);
         }
+
+        public static int UpdateUserInfo(User user)
+        {
+            string sql = "UPDATE tb_User SET Password=@pwd,RoleID=@roleId,Name=@name";
+            if (user.Mail != "")
+            {
+                sql += ",Mail=@mail";
+            }
+            else
+            {
+                sql += ",Mail=NULL";
+            }
+            if(user.Phone != "")
+            {
+                sql += ",Phone=@phone";
+            }
+            else
+            {
+                sql += ",Phone=NULL";
+            }
+            if (user.QQ != "")
+            {
+                sql += ",QQ=@qq";
+            }
+            else
+            {
+                sql += ",QQ=NULL";
+            }
+            if (user.Sex != "")
+            {
+                sql += ",Sex=@sex";
+            }
+            else
+            {
+                sql += ",Sex=NULL";
+            }
+            sql += " WHERE UserID=@userId";
+            SqlParameter[] value = new SqlParameter[]{
+                new SqlParameter("@pwd",user.Password),
+                new SqlParameter("@roleId",user.Role.RoleId),
+                new SqlParameter("@name",user.Name),
+                new SqlParameter("@mail",user.Mail),
+                new SqlParameter("@phone",user.Phone),
+                new SqlParameter("@qq",user.QQ),
+                new SqlParameter("@sex",user.Sex),
+                new SqlParameter("@userId",user.UserID)
+            };
+            return SqlHelper.ExecuteCommand(sql, value);
+        }
     }
 }
