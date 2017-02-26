@@ -140,5 +140,23 @@ namespace LibraryCms.Controllers
             }
             return View("CheckInfo");
         }
+
+        public ActionResult UpdatePassword()
+        {
+            if (Request["newPassword"] == null)
+            {
+                return View();
+            }
+            string newPassword = Request["newPassword"];
+            User user = (User)Session["User"];
+            user.Password = MD5.MD5_Encode(newPassword);
+            int i = DAL.UpdateUserInfo(user);
+            if (i == 0)
+            {
+                return Json("sql error");
+            }
+            Session["User"] = user;
+            return Json("success");
+        }
     }
 }

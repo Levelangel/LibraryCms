@@ -46,6 +46,9 @@ $(function () {
         var li = ul.getElementsByClassName("pic-mail")[0];
         var btn_a = li.getElementsByTagName("a")[0];
         btn_a.onclick = updateMail;
+        li = ul.getElementsByClassName("pic-password")[0];
+        btn_a = li.getElementsByTagName("a")[0];
+        btn_a.onclick = updatePassword;
     }
 });
 
@@ -98,5 +101,16 @@ function updateMail() {
         shade: 0.7,
         area: ['600px', '300px'],
         content: '/Account/UpdateMail'
+    });
+}
+
+function updatePassword() {
+    layer.open({
+        type: 2,
+        title: '更改密码',
+        shadeClose: true,
+        shade: 0.7,
+        area: ['600px', '360px'],
+        content: '/Account/UpdatePassword'
     });
 }
