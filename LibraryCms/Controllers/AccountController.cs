@@ -48,5 +48,29 @@ namespace LibraryCms.Controllers
             return res;
         }
 
+        [HttpPost]
+        public JsonResult UpdateUserInfo()
+        {
+            string number = Request["number"];
+            string name = Request["name"];
+            string qq = Request["qq"];
+            string sex = Request["sex"];
+            User user = DAL.GetUser(number);
+            if (user == null)
+            {
+                return Json("Account does not exists.");
+            }
+            user.Name = name;
+            user.Sex = sex;
+            user.QQ = qq;
+            int i = DAL.UpdateUserInfo(user);
+            if (i == 0)
+            {
+                return Json("sql error");
+            }
+            Session["User"] = user;
+            return Json("success");
+        }
+
     }
 }
