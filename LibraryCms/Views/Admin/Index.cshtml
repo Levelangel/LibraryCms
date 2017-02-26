@@ -4,27 +4,33 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<style>
-    a {
-        display: block;
-    }
-</style>
-
-<h3>推荐书籍</h3>
-
-@{
-    List<Book> RecoBooks = ViewBag.RecoBooks;
-    foreach (var recoBook in RecoBooks)
-    {
-        @(new HtmlString("<a href=\"javascript:;\" onclick=\"ReadBook(" + recoBook.BookId + ")\">" + recoBook.BookName + "</a>"));
-    }
-}
-
-
-@*<a href="javascript:;" onclick="ReadBook()">Effective C++ 第三版（英文）.pdf</a>*@
-
-<script>
-    function ReadBook(bookId) {
-        window.open('/Admin/ReadBook/' + bookId);
-    }
-</script>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/CSS/index.css")
+    <title>首页</title>
+</head>
+<body>
+    <h3>推荐书籍</h3>
+    <div id="bookCard">
+        @{
+            List<Book> RecoBooks = ViewBag.RecoBooks;
+            int i = 0;
+            foreach (var recoBook in RecoBooks)
+            {
+                i++;
+                <a href="javascript:;" onclick="ReadBook()">Effective C++ 第三版（英文）.pdf</a>
+                @*<a href="javascript:;" onclick="ReadBook()">@recoBook.BookName</a>*@
+                @(new HtmlString("<a href=javascript:; onclick=ReadBook(" + recoBook.BookId + ") id=Book_" + i + ">" + recoBook.BookName + "</a>"));
+            }
+}     
+        @*<a href="javascript:;" onclick="ReadBook()">Effective C++ 第三版（英文）.pdf</a>*@
+    </div>
+    <script>
+        function ReadBook(bookId) {
+            window.open('/Admin/ReadBook/' + bookId);
+        }
+    </script>
+</body>
+</html>

@@ -28,7 +28,7 @@ $(function () {
 
     var PageHeight = $(window).height();
 
-    $("#main").css("margin-top", (PageHeight - 300) / 2);
+    $("#title").css("margin-top", (PageHeight - 350) / 2);
 
     $("#password").keydown(function (e) {
            var e = e || window.event || arguments.callee.caller.arguments[0];

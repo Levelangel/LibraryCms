@@ -149,6 +149,7 @@
   <ItemGroup>
     <Content Include="Content\CSS\advancemanage.css" />
     <Content Include="Content\CSS\bookUpload.css" />
+    <Content Include="Content\CSS\index.css" />
     <Content Include="Content\CSS\login.css" />
     <Content Include="Content\CSS\personalcenter.css" />
     <Content Include="Content\CSS\UserManage.css" />

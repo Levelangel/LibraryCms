@@ -1,0 +1,14 @@
+﻿body,*{
+    padding:0px;
+    margin:0px;
+}
+#bookCard a{
+    display:block;
+    font-size:16px;
+    float:left;
+    margin:20px;
+    width:260px;
+    height:170px;
+    border:2px solid #EFEFEF;
+    border-radius:4px;
+}
