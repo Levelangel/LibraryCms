@@ -20,7 +20,6 @@
             foreach (var recoBook in RecoBooks)
             {
                 i++;
-                <a href="javascript:;" onclick="ReadBook()">Effective C++ 第三版（英文）.pdf</a>
                 @*<a href="javascript:;" onclick="ReadBook()">@recoBook.BookName</a>*@
                 @(new HtmlString("<a href=javascript:; onclick=ReadBook(" + recoBook.BookId + ") id=Book_" + i + ">" + recoBook.BookName + "</a>"));
             }
