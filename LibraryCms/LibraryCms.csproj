@@ -314,11 +314,11 @@
     <Content Include="Views\Account\UpdatePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
+
     <Content Include="Views\Admin\AddGroup.cshtml" />
-=======
+
     <Content Include="Views\Test\xxhf.cshtml" />
->>>>>>> 437ce9b3715ee663861fd19d0a5b77bfa99039e0
+
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
