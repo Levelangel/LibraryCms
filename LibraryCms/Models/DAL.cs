@@ -392,5 +392,38 @@ namespace LibraryCms.Models
             };
             return SqlHelper.ExecuteCommand(sql, value);
         }
+
+        //获取全部私信
+        public static List<Message> GetPrivateMessage(String userid)
+        {
+            string sql = "select * from tb_Message_"+userid+" order by Time";
+            SqlDataReader reader = SqlHelper.GetReader(sql);
+            if (!reader.HasRows)
+            {
+                return null;
+            }
+            List<Message> messages = new List<Message>();
+            while (reader.Read())
+            {
+                Message message = new Message
+                {
+                    MessageID = int.Parse(reader["MessageID"].ToString()),
+                    From = int.Parse(reader["From"].ToString()),
+                    Time = DateTime.Parse(reader["Time"].ToString()),
+                    Subject = reader["Subject"].ToString(),
+                    Content = reader["Content"].ToString(),
+                    Status = int.Parse(reader["Status"].ToString())
+                };
+                messages.Add(message);
+            }
+            reader.Close();
+            return messages;
+        }
+
+        public static int DeletePrivateMessage(String userid,String messageid)
+        {
+            string sql = "delete from tb_Message_"+userid+" where MessageID="+messageid;
+            return SqlHelper.ExecuteCommand(sql);
+        }
     }
 }
