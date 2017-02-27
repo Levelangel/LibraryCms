@@ -6,6 +6,8 @@ using System.Threading;
 using System.Web;
 using System.Web.Caching;
 using System.Web.Mvc;
+using LibraryCms.Models;
+using System.Web.Script.Serialization;
 
 namespace LibraryCms.Controllers
 {
@@ -132,6 +134,26 @@ namespace LibraryCms.Controllers
             Mail.SnedMsgTo(user.Mail, "信息修改确认", htmlBody, true);
             //Response.Write(htmlBody);
             return Json("ok");
+        }
+
+
+        public ActionResult xxhf()
+        {
+            DAL.DeletePrivateMessage("00000000", "00000001");
+            List<Message> m = DAL.GetPrivateMessage("00000000");
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            string tmp = "";
+            foreach (Message d in m)  //序列化List泛型为JSON字符串
+            {
+                string JsonStr = jss.Serialize(d);
+                tmp += JsonStr + "|";
+            }
+            if (m.Count > 0)
+            {
+                tmp = tmp.Substring(0, tmp.Length - 1);
+            }
+            Response.Write(tmp);
+            return null;
         }
     }
 
