@@ -158,5 +158,19 @@ namespace LibraryCms.Controllers
             Session["User"] = user;
             return Json("success");
         }
+
+        [HttpPost]
+        public JsonResult GetUserMessage()
+        {
+            User user = (User)Session["User"];//获取当前登录的用户
+            if(user == null)
+            {
+                return Json("need login");
+            }
+            //以下就是调用DAL模块中间的获取对应用户的私信
+            //数据表不存在或者“已读”标记为1，则返回空字符串
+            //int i = DAL.GetUserMessage(user);
+            return Json("");//返回空字符串
+        }
     }
 }
