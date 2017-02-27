@@ -149,6 +149,7 @@
     <Compile Include="SqlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\CSS\addgroup.css" />
     <Content Include="Content\CSS\advancemanage.css" />
     <Content Include="Content\CSS\bookUpload.css" />
     <Content Include="Content\CSS\index.css" />
@@ -314,11 +315,8 @@
     <Content Include="Views\Account\UpdatePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
-
     <Content Include="Views\Admin\AddGroup.cshtml" />
-
     <Content Include="Views\Test\xxhf.cshtml" />
-
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
