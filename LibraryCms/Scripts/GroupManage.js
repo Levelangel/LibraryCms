@@ -58,3 +58,14 @@
         }
     },"JSON");
 }
+
+function addGroup() {
+    layer.open({
+        type: 2,
+        title: '添加用户组',
+        shadeClose: true,
+        shade: 0.7,
+        area: ['800px', '420px'],
+        content: '/Admin/AddGroup'
+    });
+}

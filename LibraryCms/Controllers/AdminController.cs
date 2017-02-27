@@ -526,5 +526,14 @@ namespace LibraryCms.Controllers
             }
             return Json("success");
         }
+
+        public ActionResult AddGroup()
+        {
+            if (Session["isLogin"] == null || Session["isLogin"].ToString() == "False")
+            {
+                //return RedirectToAction("Index", "Account");
+            }
+            return View();
+        }
     }
 }

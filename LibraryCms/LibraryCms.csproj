@@ -219,6 +219,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\account.js" />
+    <Content Include="Scripts\addGroup.js" />
     <Content Include="Scripts\BookManage.js" />
     <Content Include="Scripts\bookupload.js" />
     <Content Include="Scripts\canvas-nest.min.js" />
@@ -310,6 +311,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\UpdatePassword.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Admin\AddGroup.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

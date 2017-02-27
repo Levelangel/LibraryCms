@@ -1,0 +1,45 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    @Scripts.Render("~/Scripts/jquery")
+    @Scripts.Render("~/Scripts/js-layer")
+    @Scripts.Render("~/Scripts/js-addgroup")
+    @Styles.Render("~/Content/css-addgroup")
+</head>
+<body>
+    <div id="testDiv">
+        <ul>
+            <li><span>用户组名称：</span><input class="input" type="text" name="groupName" value="" placeholder="" /></li>
+            <li>
+                <span>隶属于：</span><input class="input" id="belong" list="belongto" />
+                <datalist id="belongto">
+                    @{
+
+                    }
+                </datalist>
+            </li>
+            <li>
+                <span>拥有权限：</span>
+                <div>
+                    <input type="checkbox" name="rights" value="" /><span>书籍管理</span>
+                    <input type="checkbox" name="rights" value="" /><span>书籍类别管理</span>
+                    <input type="checkbox" name="rights" value="" /><span>书籍题库</span>
+                    <br />
+                    <input type="checkbox" name="rights" value="" /><span>用户管理</span>
+                    <input type="checkbox" name="rights" value="" /><span>用户组管理</span>
+                    <input type="checkbox" name="rights" value="" /><span>系部管理</span>
+                </div>
+            </li>           
+        </ul>
+        <a href="javascript:;">保存</a>
+    </div>
+    
+</body>
+</html>

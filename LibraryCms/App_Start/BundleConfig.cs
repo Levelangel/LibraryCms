@@ -48,6 +48,8 @@ namespace LibraryCms
             bundles.Add(new ScriptBundle("~/Scripts/js-bookupload").Include("~/Scripts/bookupload.js"));
             bundles.Add(new ScriptBundle("~/Scripts/js-updatemail").Include("~/Scripts/updatemail.js"));
             bundles.Add(new ScriptBundle("~/Scripts/js-updatpassword").Include("~/Scripts/updatepassword.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/js-addgroup").Include("~/Scripts/addgroup.js"));
+            bundles.Add(new StyleBundle("~/Content/css-addgroup").Include("~/Content/css/addgroup.css"));
         }
     }
 }
