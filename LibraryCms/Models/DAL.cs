@@ -425,5 +425,57 @@ namespace LibraryCms.Models
             string sql = "delete from tb_Message_"+userid+" where MessageID="+messageid;
             return SqlHelper.ExecuteCommand(sql);
         }
+
+        //获取该书的全部问题
+        public static List<Question> GetQuestion(String bookid)
+        {
+            string sql = "select * from tb_Question_" + bookid;
+            SqlDataReader reader = SqlHelper.GetReader(sql);
+            if (!reader.HasRows)
+            {
+                return null;
+            }
+            List<Question> questions = new List<Question>();
+            while (reader.Read())
+            {
+                Question question = new Question
+                {
+                    QuestionId = reader["QuestionID"].ToString(),
+                    Content = reader["Content"].ToString(),
+                    answerA = reader["answerA"].ToString(),
+                    answerB = reader["answerB"].ToString(),
+                    answerC = reader["answerC"].ToString(),
+                    answerD = reader["answerD"].ToString(),
+                    answerE = reader["answerE"].ToString(),
+                    Correct = reader["Correct"].ToString(),
+                    Type =int.Parse(reader["Type"].ToString())
+                };
+                questions.Add(question);
+            }
+            reader.Close();
+            return questions;
+        }
+
+        //添加单个问题
+        public static int InsertQuestion(Question question,String bookid)
+        {
+            string sql = "insert into tb_Question_"+bookid +" values(@Content,";
+            switch (question.Type) {
+                case 0: sql += "@answerA,@answerB,@answerC,@answerD,NULL,@Correct,@Type)"; break;
+                case 1: sql += "@answerA,@answerB,@answerC,@answerD,@answerE,@Correct,@Type)"; break;
+                default: sql += "@answerA,NULL,NULL,NULL,NULL,@Correct,@Type)"; break;
+            }
+            SqlParameter[] value = new SqlParameter[]{
+                new SqlParameter("@Content",question.Content),
+                new SqlParameter("@answerA",question.answerA),
+                new SqlParameter("@answerB",question.answerB),
+                new SqlParameter("@answerC",question.answerC),
+                new SqlParameter("@answerD",question.answerD),
+                new SqlParameter("@answerE",question.answerE),
+                new SqlParameter("@Correct",question.Correct),
+                new SqlParameter("@Type",question.Type)
+            };
+            return SqlHelper.ExecuteCommand(sql, value);
+        }
     }
 }
