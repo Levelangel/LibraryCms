@@ -185,6 +185,24 @@ namespace LibraryCms.Controllers
             Response.Write(tmp);
             return null;
         }
+
+        public ActionResult xxhf2() {
+            DAL.DeleteQuestion("1","1");
+            List<Question> m = DAL.GetQuestion("1");
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            string tmp = "";
+            foreach (Question d in m)  //序列化List泛型为JSON字符串
+            {
+                string JsonStr = jss.Serialize(d);
+                tmp += JsonStr + "|";
+            }
+            if (m.Count > 0)
+            {
+                tmp = tmp.Substring(0, tmp.Length - 1);
+            }
+            Response.Write(tmp);
+            return null;
+        }
     }
 
     //public class clsSaveFile

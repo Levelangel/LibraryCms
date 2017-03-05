@@ -393,6 +393,7 @@ namespace LibraryCms.Models
             return SqlHelper.ExecuteCommand(sql, value);
         }
 
+        #region 私信
         //获取全部私信
         public static List<Message> GetPrivateMessage(String userid)
         {
@@ -420,12 +421,15 @@ namespace LibraryCms.Models
             return messages;
         }
 
+        //删除单个私信
         public static int DeletePrivateMessage(String userid,String messageid)
         {
             string sql = "delete from tb_Message_"+userid+" where MessageID="+messageid;
             return SqlHelper.ExecuteCommand(sql);
         }
+#endregion
 
+        #region 书籍测试
         //获取该书的全部问题
         public static List<Question> GetQuestion(String bookid)
         {
@@ -477,5 +481,40 @@ namespace LibraryCms.Models
             };
             return SqlHelper.ExecuteCommand(sql, value);
         }
+
+        //更新单个问题
+        public static int UpdateQuestion(Question question,String bookid)
+        {
+            string sql = "UPDATE tb_Question_"+bookid+" SET Content=@Content,";
+            switch (question.Type)
+            {
+                case 0: sql += "answerA=@answerA,answerB=@answerB,answerC=@answerC,answerD=@answerD,answerE='',Correct=@Correct,Type=@Type"; break;
+                case 1: sql += "answerA=@answerA,answerB=@answerB,answerC=@answerC,answerD=@answerD,answerE=@answerE,Correct=@Correct,Type=@Type"; break;
+                default: sql += "@answerA=@answerA,answerB='',answerC='',answerD='',answerE='',Correct=@Correct,Type=@Type"; break;
+            }
+            sql += " where QuestionID=@QuestionId";
+            SqlParameter[] value = new SqlParameter[]{
+                new SqlParameter("@Content",question.Content),
+                new SqlParameter("@answerA",question.answerA),
+                new SqlParameter("@answerB",question.answerB),
+                new SqlParameter("@answerC",question.answerC),
+                new SqlParameter("@answerD",question.answerD),
+                new SqlParameter("@answerE",question.answerE),
+                new SqlParameter("@Correct",question.Correct),
+                new SqlParameter("@Type",question.Type),
+                new SqlParameter("@QuestionId",question.QuestionId)
+            };
+            return SqlHelper.ExecuteCommand(sql, value);
+        }
+
+        //删除单个问题
+        public static int DeleteQuestion(String questionid, String bookid)
+        {
+            string sql = "delete from tb_Question_"+bookid;
+            sql += " where QuestionID=@QuestionId";
+            SqlParameter value = new SqlParameter("@QuestionID", questionid);
+            return SqlHelper.ExecuteCommand(sql, value);
+        }
+        #endregion
     }
 }
