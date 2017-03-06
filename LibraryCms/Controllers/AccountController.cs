@@ -1,6 +1,8 @@
 ﻿using System.Web.Mvc;
 using LibraryCms.Models;
 using System;
+using System.Collections.Generic;
+using System.Web.Script.Serialization;
 
 namespace LibraryCms.Controllers
 {
@@ -163,14 +165,32 @@ namespace LibraryCms.Controllers
         public JsonResult GetUserMessage()
         {
             User user = (User)Session["User"];//获取当前登录的用户
-            if(user == null)
+            if (user == null)
             {
                 return Json("need login");
             }
-            //以下就是调用DAL模块中间的获取对应用户的私信
-            //数据表不存在或者“已读”标记为1，则返回空字符串
-            //int i = DAL.GetUserMessage(user);
-            return Json("");//返回空字符串
+            int msgType = int.Parse(Request["msgType"].ToString());
+            List<Message> msgs = DAL.GetPrivateMessage(user.UserID);
+            List<object> objs = new List<object>();
+            foreach (Message msg in msgs) 
+            {
+                if (msg.Status != msgType)
+                {
+                    continue;
+                }
+                string number = DAL.GetUserById(msg.From.ToString()).Number;
+                object obj = new
+                {
+                    from = number,
+                    msg = msg
+                };
+                objs.Add(obj);
+            }
+            JsonResult ret = new JsonResult()
+            {
+                Data = objs
+            };
+            return ret;
         }
     }
 }

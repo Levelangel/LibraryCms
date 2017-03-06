@@ -176,6 +176,7 @@
 #PersonalMail {
     margin-top:20px;
     list-style-type:none;
+    margin-left:200px;
 }
 
 #PersonalMail li {
@@ -183,7 +184,7 @@
     margin: 0 auto 20px;
     border:solid 1px #ccc;
     padding :5px;
-    width: 80%;
+    width: 90%;
     border-radius:4px;
     color: rgba(0,0,0,0.8);
 }
@@ -204,4 +205,32 @@
 #PersonalMail li .content {
     margin-top:10px;
     line-height:150%;
+}
+#mailType {
+    width:190px;
+    position:absolute;
+    top:105px;
+    padding:5px;
+    border:1px solid #CCC;
+    border-radius:4px;
+}
+#mailType span{
+    display:inline-block;
+    width:100%;
+    height:40px;
+    line-height:40px;
+    text-align:center;
+    border:1px solid #fff;
+    cursor:pointer;
+    transition:all linear 0.25s;
+    -o-transition:all linear 0.25s;
+    -ms-transition:all linear 0.25s;
+    -moz-transition:all linear 0.25s;
+    -webkit-transition:all linear 0.25s;
+    border-radius:4px;
+}
+.check,
+#mailType span:hover{
+    background:#5FBB39;
+    color:#fff;
 }

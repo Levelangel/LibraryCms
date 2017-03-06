@@ -15,7 +15,7 @@
             <input id="file" name="file" type="file" />
             <input type="month" name="month" value="" />
             <input type="button" name="name" value="GetTime" onclick="GetTime();" />
-            <a href="javascript:;" onclick="SendMessage()">Send Message</a>
+            <a href="javascript:;" onclick="SendMessage()">Get Message</a>
         </div>
         <div id="percent">
             0.00%
@@ -29,9 +29,9 @@
         }
 
         function SendMessage() {
-            $.post("/Account/SendCheckMessage", null, function () {
-
-            });
+            $.post("/Test/GetUserNotReadMessage", null, function (res) {
+                console.log(res);
+            },"JSON");
         }
     </script>
 </body>

@@ -12,7 +12,7 @@
     var url = "/Account/Check";
     var data = { 'account': account, 'password': password };
     $.post(url, data, function (result) {
-        if (result.status === "1") {
+        if (result.status === "1") { 
             //登陆成功
             window.location.href = "/Admin";
         }
@@ -37,7 +37,7 @@ $(function () {
            }
     });
     var ul = document.getElementById("personalinfo");
-    if (ul != null) {
+    if (ul != null) { 
         var a = ul.getElementsByTagName("a")[0];
         a.onclick = updateUserInfo;
     }
@@ -50,7 +50,82 @@ $(function () {
         btn_a = li.getElementsByTagName("a")[0];
         btn_a.onclick = updatePassword;
     }
+    var mailType = document.getElementById("mailType");
+    if (mailType != null) {
+        var spans = mailType.getElementsByTagName("span");
+        spans[0].onclick = mailNotRead;
+        spans[1].onclick = mailHasRead;
+        spans[2].onclick = mailHasSent;
+        spans[0].click();
+    }
+
 });
+
+function mailNotRead() {
+    var spans = document.getElementById("mailType").getElementsByTagName("span");
+    for (var i = 0; i < spans.length; i++) {
+        $(spans[i]).removeClass("check");
+    }
+    $(this).addClass("check");
+    var url = "/Account/GetUserMessage";
+    var data = {"msgType":0};
+    $.post(url, data, function (res) {
+        var ul = document.getElementById("PersonalMail");
+        ul.innerHTML = "";
+        var tmp = '';
+        for (var j = 0; j < res.length; j++) {
+            tmp += '<li><span>来自：' + res[j].from;
+            tmp += '</span><span class="title">主题：' + res[j].msg.Subject;
+            tmp += '</span><br/><p class="content">内容：' + res[j].msg.Content;
+            tmp += '<span></span></p></li>';
+        }
+        ul.innerHTML = tmp;
+    }, "JSON");
+}
+
+function mailHasSent() {
+    var spans = document.getElementById("mailType").getElementsByTagName("span");
+    for (var i = 0; i < spans.length; i++) {
+        $(spans[i]).removeClass("check");
+    }
+    $(this).addClass("check");
+    var url = "/Account/GetUserMessage";
+    var data = { "msgType": 1 };
+    $.post(url, data, function (res) {
+        var ul = document.getElementById("PersonalMail");
+        ul.innerHTML = "";
+        var tmp = '';
+        for (var j = 0; j < res.length; j++) {
+            tmp += '<li><span>来自：' + res[j].from;
+            tmp += '</span><span class="title">主题：' + res[j].msg.Subject;
+            tmp += '</span><br/><p class="content">内容：' + res[j].msg.Content;
+            tmp += '<span></span></p></li>';
+        }
+        ul.innerHTML = tmp;
+    }, "JSON");
+}
+
+function mailHasRead() {
+    var spans = document.getElementById("mailType").getElementsByTagName("span");
+    for (var i = 0; i < spans.length; i++) {
+        $(spans[i]).removeClass("check");
+    }
+    $(this).addClass("check");
+    var url = "/Account/GetUserMessage";
+    var data = { "msgType": 2 };
+    $.post(url, data, function (res) {
+        var ul = document.getElementById("PersonalMail");
+        ul.innerHTML = "";
+        var tmp = '';
+        for (var j = 0; j < res.length; j++) {
+            tmp += '<li><span>来自：' + res[j].from;
+            tmp += '</span><span class="title">主题：' + res[j].msg.Subject;
+            tmp += '</span><br/><p class="content">内容：' + res[j].msg.Content;
+            tmp += '<span></span></p></li>';
+        }
+        ul.innerHTML = tmp;
+    }, "JSON");
+}
 
 function logout() {
     window.location.href = "/Account/Logout";

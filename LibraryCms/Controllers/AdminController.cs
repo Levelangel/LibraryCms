@@ -535,5 +535,10 @@ namespace LibraryCms.Controllers
             }
             return View();
         }
+
+        public ActionResult TestOnline()
+        {
+            return View();
+        }
     }
 }

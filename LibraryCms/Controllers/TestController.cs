@@ -203,6 +203,27 @@ namespace LibraryCms.Controllers
             Response.Write(tmp);
             return null;
         }
+
+        public JsonResult GetUserNotReadMessage()
+        {
+            User user = new User()
+            {
+                UserID = "1"
+            };
+            if (user == null)
+            {
+                return Json("need login");
+            }
+            List<Message> msgs = DAL.GetPrivateMessage(user.UserID);
+            List<object> objs = new List<object>();
+            var obj = new { from = "test", data = msgs[0] };
+            objs.Add(obj);
+            objs.Add(obj); objs.Add(obj);
+            JsonResult res = new JsonResult();
+            res.Data = objs;
+            return res;
+
+        }
     }
 
     //public class clsSaveFile
