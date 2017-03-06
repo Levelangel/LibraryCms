@@ -535,5 +535,37 @@ namespace LibraryCms.Controllers
             }
             return View();
         }
+
+        #region 更新用户信息
+        [HttpPost]
+        public JsonResult UpdateUser()
+        {
+            string number = Request["number"];
+            string password = Request["password"];
+            string name = Request["name"];
+            string sex = Request["sex"];
+            string mail = Request["mail"];
+            string phone = Request["phone"];
+            string qq = Request["qq"];
+            User user = DAL.GetUser(number);
+            if (user == null)
+            {
+                return Json("Account does not exists.");
+            }
+            user.Number = number;
+            user.Password = password;
+            user.Name = name;
+            user.Sex = sex;
+            user.Mail = mail;
+            user.Phone = phone;
+            user.QQ = qq;
+            int i = DAL.UpdateUserInfo(user);
+            if (i == 0)
+            {
+                return Json("sql error");
+            }
+            return Json("success");
+        }
+        #endregion
     }
 }
