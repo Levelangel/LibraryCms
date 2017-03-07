@@ -54,7 +54,7 @@ namespace LibraryCms.Models
                 Number = reader["Number"].ToString(),
                 Phone = reader["Phone"].ToString(),
                 QQ = reader["QQ"].ToString(),
-                Sex = reader["Sex"].ToString(),
+                Sex = reader["Sex"].ToString().Trim(),
             };
             string roleId = reader["RoleID"].ToString();
             reader.Close();

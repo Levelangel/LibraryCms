@@ -552,18 +552,21 @@ namespace LibraryCms.Controllers
             string mail = Request["mail"];
             string phone = Request["phone"];
             string qq = Request["qq"];
+            string roleId = Request["roleId"];
             User user = DAL.GetUser(number);
             if (user == null)
             {
                 return Json("Account does not exists.");
             }
             user.Number = number;
-            user.Password = password;
+            //这里比较一下密码有没有更改，没更改则不改变
+            user.Password = (password == user.Password) ? user.Password : MD5.MD5_Encode(password);
             user.Name = name;
             user.Sex = sex;
             user.Mail = mail;
             user.Phone = phone;
             user.QQ = qq;
+            user.Role.RoleId = roleId;
             int i = DAL.UpdateUserInfo(user);
             if (i == 0)
             {
