@@ -22,7 +22,7 @@ CREATE TABLE tb_User(
 	[Mail] VARCHAR(50) NULL,
 	[Phone] CHAR(11) NULL,
 	[QQ] VARCHAR(20) NULL,
-	[Sex] CHAR(2) NULL,
+	[Sex] CHAR(1) NULL,
 	FOREIGN KEY([RoleID]) REFERENCES tb_Role([RoleID])
 )
 CREATE TABLE tb_UserSettings(
