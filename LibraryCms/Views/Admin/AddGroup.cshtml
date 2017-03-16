@@ -1,4 +1,5 @@
-﻿@{
+﻿@using LibraryCms.Models
+@{
     Layout = null;
 }
 
@@ -14,16 +15,20 @@
     @Styles.Render("~/Content/css-addgroup")
 </head>
 <body>
-    <div id="testDiv">
+    <div id="addDiv">
         <ul>
             <li><span>用户组名称：</span><input class="input" type="text" name="groupName" value="" placeholder="" /></li>
             <li>
-                <span>隶属于：</span><input class="input" id="belong" list="belongto" />
-                <datalist id="belongto">
+                <span>隶属于：</span>
+                <select class="input">
                     @{
-
+                        List<Department> departments = (List<Department>)ViewBag.departments;
+                        foreach (var department in departments)
+                        {
+                            @(new HtmlString("<option value=\"" + department.DepartmentType + department.DepartmentId + "\">" + department.DepartmentName + "</option>"))
+                        }
                     }
-                </datalist>
+                </select>
             </li>
             <li>
                 <span>拥有权限：</span>
@@ -40,6 +45,5 @@
         </ul>
         <a href="javascript:;">保存</a>
     </div>
-    
 </body>
 </html>

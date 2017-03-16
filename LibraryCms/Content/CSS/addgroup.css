@@ -1,17 +1,17 @@
-﻿ul{
+﻿#addDiv ul{
     list-style:none;
 }
-ul li {
+#addDiv ul li {
     position:relative;
 }
-ul li span {
+#addDiv ul li span {
     display:inline-block;
     width:100px;
     height:52px;
     line-height:52px;
     text-align:right;
 }
-ul li .input {
+#addDiv ul li .input {
     width:500px;
     height:50px;
     line-height:50px;
@@ -20,8 +20,9 @@ ul li .input {
     border-radius:4px;
     border:1px solid #ccc;
     outline-color:#5FBB39;
+    font-size:20px;
 }
-ul li input[type=checkbox]{
+#addDiv ul li input[type=checkbox]{
     width:20px;
     height:20px;
     padding:0;
@@ -29,14 +30,14 @@ ul li input[type=checkbox]{
     margin:0;
     vertical-align:middle;
 }
-ul li div{
+#addDiv ul li div{
     position:absolute;
     width:500px;
     left:150px;
     top:10px;
 }
 
-ul li div span{
+#addDiv ul li div span{
     display:inline-block;
     width:130px;
     height:30px;
@@ -45,7 +46,7 @@ ul li div span{
     margin-left:5px;
 }
 
-a{
+#addDiv a{
     text-decoration:none;
     display:block;
     height:50px;
@@ -62,7 +63,7 @@ a{
     -webkit-transition: all linear 0.2s;
     -moz-transition: all linear 0.2s;
 }
-a:hover{
+#addDiv a:hover{
     color:#fff;
     background-color:#5FBB39;
 }

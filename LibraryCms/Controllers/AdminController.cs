@@ -131,7 +131,8 @@ namespace LibraryCms.Controllers
                 return Json("No Rights");
             }
             string strSearch = Request["strSearch"];
-            List<Role> Roles = DAL.GetRole(strSearch);
+            string isEx = Request["isEx"] == null ? "false" : "true";
+            List<Role> Roles = DAL.GetRole(strSearch, (isEx == "true"));
             JavaScriptSerializer jss = new JavaScriptSerializer();
             string tmp = "";
             foreach (Role role in Roles)
@@ -531,9 +532,31 @@ namespace LibraryCms.Controllers
         {
             if (Session["isLogin"] == null || Session["isLogin"].ToString() == "False")
             {
-                //return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Account");
             }
-            return View();
+            if (Request["groupName"] == null || Request["departmentType"] == null || Request["departmentId"] == null || Request["rights"] == null)
+            {
+                List<Department> departments = DAL.GetDepartment("");
+                ViewBag.departments = departments;
+                return View();
+            }
+            string groupName = Request["groupName"];
+            string departmentType = Request["departmentType"];
+            string departmentId = Request["departmentId"];
+            string rights = Request["rights"];
+            Department dept = DAL.GetDepartmentById(departmentId, departmentType);
+            Role role = new Role()
+            {
+                RoleName = groupName,
+                Department = dept,
+                Rights = rights
+            };
+            int i = DAL.InsertGroup(role);
+            if(i == 0)
+            {
+                return Json("sql error");
+            }
+            return Json("success");
         }
 
         public ActionResult TestOnline()

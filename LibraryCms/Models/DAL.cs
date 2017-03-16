@@ -151,9 +151,13 @@ namespace LibraryCms.Models
             return null;
         }
 
-        public static List<Role> GetRole(string str)
+        public static List<Role> GetRole(string str, bool isEx)
         {
             string sql = "select * from tb_Role where RoleName like @name";
+            if(isEx)
+            {
+                sql = "select * from tb_Role where RoleName = @name";
+            }
             SqlDataReader reader = SqlHelper.GetReader(sql, new SqlParameter("@name", "%" + str + "%"));
             List<string> tmp = new List<string>();
             if(reader.HasRows)
@@ -516,5 +520,17 @@ namespace LibraryCms.Models
             return SqlHelper.ExecuteCommand(sql, value);
         }
         #endregion
+
+        public static int InsertGroup(Role role)
+        {
+            string sql = "insert into tb_Role values(@roleName,@deptType,@deptId,@rights)";
+            SqlParameter[] value = new SqlParameter[]{
+                new SqlParameter("@roleName",role.RoleName),
+                new SqlParameter("@deptType",role.Department.DepartmentType.ToString()),
+                new SqlParameter("@deptId",role.Department.DepartmentId),
+                new SqlParameter("@rights",role.Rights),
+            };
+            return SqlHelper.ExecuteCommand(sql, value);
+        }
     }
 }

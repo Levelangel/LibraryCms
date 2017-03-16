@@ -14,15 +14,16 @@
                 var obj = strToJson(resArr[i]); //Json字符串转Json对象
                 var tmpStr = '';
                 tmpStr += '<li><span>' + obj.RoleName + '：';
-                if (obj.Department.DepartmentType === 0) {
-                    tmpStr += '系';
-                }
-                if (obj.Department.DepartmentType === 1) {
-                    tmpStr += '部';
-                }
-                if (obj.Department.DepartmentType === 2) {
-                    tmpStr += '管理员';
-                }
+                //if (obj.Department.DepartmentType === 0) {
+                //    tmpStr += '系';
+                //}
+                //if (obj.Department.DepartmentType === 1) {
+                //    tmpStr += '部';
+                //}
+                //if (obj.Department.DepartmentType === 2) {
+                //    tmpStr += '管理员';
+                //}
+                tmpStr += obj.Department.DepartmentName;
                 tmpStr += '</span>';
                 tmpStr += '<div><input type="checkbox" ';
                 if (obj.Rights[0] === '1') {
@@ -32,15 +33,15 @@
                 if (obj.Rights[1] === '1') {
                     tmpStr += 'checked="checked"';
                 }
-                tmpStr += '/>书籍类别管理<input type="checkbox" ';
+                tmpStr += '/>书籍类别管理<br/><input type="checkbox" ';
                 if (obj.Rights[2] === '1') {
                     tmpStr += 'checked="checked"';
                 }
-                tmpStr += '/>书籍题库<br/><input type="checkbox" ';
+                tmpStr += '/>书籍题库<input type="checkbox" ';
                 if (obj.Rights[3] === '1') {
                     tmpStr += 'checked="checked"';
                 }
-                tmpStr += '/>用户管理<input type="checkbox" ';
+                tmpStr += '/>用户管理<br/><input type="checkbox" ';
                 if (obj.Rights[4] === '1') {
                     tmpStr += 'checked="checked"';
                 }
