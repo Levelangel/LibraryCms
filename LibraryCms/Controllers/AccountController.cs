@@ -171,6 +171,10 @@ namespace LibraryCms.Controllers
             }
             int msgType = int.Parse(Request["msgType"].ToString());
             List<Message> msgs = DAL.GetPrivateMessage(user.UserID);
+            if (msgs == null)
+            {
+                return Json("");
+            }
             List<object> objs = new List<object>();
             foreach (Message msg in msgs) 
             {

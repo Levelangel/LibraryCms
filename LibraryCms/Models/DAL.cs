@@ -153,12 +153,14 @@ namespace LibraryCms.Models
 
         public static List<Role> GetRole(string str, bool isEx)
         {
+            string strSearch = "%" + str + "%";
             string sql = "select * from tb_Role where RoleName like @name";
             if(isEx)
             {
                 sql = "select * from tb_Role where RoleName = @name";
+                strSearch = str;
             }
-            SqlDataReader reader = SqlHelper.GetReader(sql, new SqlParameter("@name", "%" + str + "%"));
+            SqlDataReader reader = SqlHelper.GetReader(sql, new SqlParameter("@name", strSearch));
             List<string> tmp = new List<string>();
             if(reader.HasRows)
             {
@@ -401,7 +403,7 @@ namespace LibraryCms.Models
         //获取全部私信
         public static List<Message> GetPrivateMessage(String userid)
         {
-            string sql = "select * from tb_Message_"+userid+" order by Time";
+            string sql = "if (object_id('tb_Message_" + userid + "') is not null) begin exec('select * from tb_Message_" + userid + " order by Time') end";
             SqlDataReader reader = SqlHelper.GetReader(sql);
             if (!reader.HasRows)
             {
@@ -531,6 +533,15 @@ namespace LibraryCms.Models
                 new SqlParameter("@rights",role.Rights),
             };
             return SqlHelper.ExecuteCommand(sql, value);
+        }
+
+        public static int DeleteGroup(Role role)
+        {
+            string sql_delUser = "delete from tb_User where RoleID = " + role.RoleId;
+            string sql_delRole = "delete from tb_Role where RoleID = " + role.RoleId;
+            int i = SqlHelper.ExecuteCommand(sql_delUser);
+            i = SqlHelper.ExecuteCommand(sql_delRole);
+            return i;
         }
     }
 }

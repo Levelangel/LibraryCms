@@ -598,5 +598,33 @@ namespace LibraryCms.Controllers
             return Json("success");
         }
         #endregion
+
+        [HttpPost]
+        public JsonResult DeleteGroup()
+        {
+            if (Session["isLogin"] == null || Session["isLogin"].ToString() == "False")
+            {
+                return Json("need login");
+            }
+            User user = (User)Session["User"];
+            string right = user.Role.Rights;
+            if (right[4] != '1')
+            {
+                return Json("No Rights");
+            }
+            string strSearch = Request["strSearch"];
+            string isEx = Request["isEx"] == null ? "false" : "true";
+            List<Role> Roles = DAL.GetRole(strSearch, (isEx == "true"));
+            if(Roles == null)
+            {
+                return Json("role name is null");
+            }
+            int i = DAL.DeleteGroup(Roles[0]);
+            if (i == 0)
+            {
+                return Json("sql error");
+            }
+            return Json("success");
+        }
     }
 }
