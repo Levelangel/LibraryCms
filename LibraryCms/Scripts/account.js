@@ -53,17 +53,18 @@ $(function () {
     var mailType = document.getElementById("mailType");
     if (mailType != null) {
         var spans = mailType.getElementsByTagName("span");
-        spans[0].onclick = mailNotRead;
-        spans[1].onclick = mailHasRead;
-        spans[2].onclick = mailHasSent;
-        spans[0].click();
+        spans[0].onclick = sendMessage;
+        spans[1].onclick = mailNotRead;
+        spans[2].onclick = mailHasRead;
+        spans[3].onclick = mailHasSent;
+        spans[1].click();
     }
 
 });
 
 function mailNotRead() {
     var spans = document.getElementById("mailType").getElementsByTagName("span");
-    for (var i = 0; i < spans.length; i++) {
+    for (var i = 1; i < spans.length; i++) {
         $(spans[i]).removeClass("check");
     }
     $(this).addClass("check");
@@ -85,7 +86,7 @@ function mailNotRead() {
 
 function mailHasSent() {
     var spans = document.getElementById("mailType").getElementsByTagName("span");
-    for (var i = 0; i < spans.length; i++) {
+    for (var i = 1; i < spans.length; i++) {
         $(spans[i]).removeClass("check");
     }
     $(this).addClass("check");
@@ -107,7 +108,7 @@ function mailHasSent() {
 
 function mailHasRead() {
     var spans = document.getElementById("mailType").getElementsByTagName("span");
-    for (var i = 0; i < spans.length; i++) {
+    for (var i = 1; i < spans.length; i++) {
         $(spans[i]).removeClass("check");
     }
     $(this).addClass("check");
@@ -187,5 +188,16 @@ function updatePassword() {
         shade: 0.7,
         area: ['600px', '360px'],
         content: '/Account/UpdatePassword'
+    });
+}
+
+function sendMessage() {
+    layer.open({
+        type: 2,
+        title: '发送消息',
+        shadeClose: true,
+        shade: 0.7,
+        area: ['600px', '360px'],
+        content: '/Account/SendMessage'
     });
 }

@@ -196,5 +196,14 @@ namespace LibraryCms.Controllers
             };
             return ret;
         }
+
+        public ActionResult SendMessage() //发送私信
+        {
+            if (Session["isLogin"] != null && Session["isLogin"].ToString() == "True")
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+            return View();
+        }
     }
 }
