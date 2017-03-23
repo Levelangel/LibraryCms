@@ -558,7 +558,56 @@ namespace LibraryCms.Controllers
             }
             return Json("success");
         }
-
+        public ActionResult UpdateGroup()
+        {
+            if (Session["isLogin"] == null || Session["isLogin"].ToString() == "False")
+            {
+                return RedirectToAction("Index", "Account");
+            }
+            if (Request["groupName"] == null || Request["departmentType"] == null || Request["departmentId"] == null || Request["rights"] == null)
+            {
+                string id = "";
+                if (ControllerContext.RouteData.Values["ID"] != null)
+                {
+                    id = ControllerContext.RouteData.Values["ID"].ToString();
+                }
+                List<Department> departments = DAL.GetDepartment("");
+                ViewBag.departments = departments;
+                ViewBag.nowGroupName = id;
+                List<Role> Roles = DAL.GetRole(id, true);
+                ViewBag.nowRole = Roles[0];
+                Department departmentNow = DAL.GetDepartmentById(Roles[0].Department.DepartmentId, Roles[0].Department.DepartmentType.ToString());
+                ViewBag.nowDept = departmentNow;
+                return View();
+            }
+            string roleId = Request["roleId"];
+            string roleName = Request["groupName"];
+            string departmentType = Request["departmentType"];
+            string departmentId = Request["departmentId"];
+            string rights = Request["rights"];
+            Role role = DAL.GetRoleById(roleId);
+            role.RoleName = roleName;
+            role.Department.DepartmentId = departmentId;
+            switch(departmentType)
+            {
+                case "A":
+                    role.Department.DepartmentType = DepartmentType.A;
+                    break;
+                case "B":
+                    role.Department.DepartmentType = DepartmentType.B;
+                    break;
+                case "X":
+                    role.Department.DepartmentType = DepartmentType.X;
+                    break;
+            }
+            role.Rights = rights;
+            int i = DAL.UpdateGroup(role);
+            if (i == 0)
+            {
+                return Json("sql error");
+            }
+            return Json("success");
+        }
         public ActionResult TestOnline()
         {
             return View();

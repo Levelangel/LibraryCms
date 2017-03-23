@@ -1,0 +1,58 @@
+﻿@using LibraryCms.Models
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    @Scripts.Render("~/Scripts/jquery")
+    @Scripts.Render("~/Scripts/js-layer")
+    @Scripts.Render("~/Scripts/js-updategroup")
+    @Styles.Render("~/Content/css-addgroup")
+</head>
+<body>
+    <div id="addDiv">
+        <ul>
+            <li id="roleid" roleid="@ViewBag.nowRole.RoleId"><span>用户组名称：</span><input class="input" type="text" name="groupName" value="@ViewBag.nowGroupName" placeholder="" /></li>
+            <li>
+                <span>隶属于：</span>
+                <select class="input">
+                    @{
+                        List<Department> departments = (List<Department>)ViewBag.departments;
+                        foreach (var department in departments)
+                        {
+                            string tmp = "<option value=\"" + department.DepartmentType + department.DepartmentId + "\" ";
+                            if (department.DepartmentName == ViewBag.nowDept.DepartmentName)
+                            {
+                                tmp += "selected=\"selected\"";
+                            }
+                            tmp+= ">" + department.DepartmentName + "</option>";
+                            @(new HtmlString(tmp))
+                        }
+                    }
+                </select>
+            </li>
+            <li>
+                <span>拥有权限：</span>
+                <div>
+                    @{
+                        string rights = ViewBag.nowRole.Rights;
+                    }
+                    <input type="checkbox" name="rights" @{ Write(rights[0] == '1' ? "checked=\"checked\"" : "");}/><span>书籍管理</span>
+                    <input type="checkbox" name="rights" @{ Write(rights[1] == '1' ? "checked=\"checked\"" : "");} /><span>书籍类别管理</span>
+                    <input type="checkbox" name="rights" @{ Write(rights[2] == '1' ? "checked=\"checked\"" : "");} /><span>书籍题库</span>
+                    <br />
+                    <input type="checkbox" name="rights" @{ Write(rights[3] == '1' ? "checked=\"checked\"" : "");} /><span>用户管理</span>
+                    <input type="checkbox" name="rights" @{ Write(rights[4] == '1' ? "checked=\"checked\"" : "");} /><span>用户组管理</span>
+                    <input type="checkbox" name="rights" @{ Write(rights[5] == '1' ? "checked=\"checked\"" : "");} /><span>系部管理</span>
+                </div>
+            </li>
+        </ul>
+        <a href="javascript:;">保存</a>
+    </div>
+</body>
+</html>

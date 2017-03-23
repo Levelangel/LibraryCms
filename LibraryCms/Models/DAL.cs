@@ -63,10 +63,14 @@ namespace LibraryCms.Models
             return user;
         }
 
-        public static List<Department> GetDepartment(string str)
+        public static List<Department> GetDepartment(string str, bool isEx = false)
         {
             string sql = "select * from tb_Department_B where DepartmentName like @name";
-            SqlDataReader reader = SqlHelper.GetReader(sql, new SqlParameter("@name", "%" + str + "%"));
+            if(isEx)
+            {
+                sql = "select * from tb_Department_B where DepartmentName = @name";
+            }
+            SqlDataReader reader = SqlHelper.GetReader(sql, new SqlParameter("@name", isEx ? str : "%" + str + "%"));
             List<Department> ret = new List<Department>();
             while (reader.Read())
             {
@@ -80,7 +84,11 @@ namespace LibraryCms.Models
             }
             reader.Close();
             sql = "select * from tb_Department_X where DepartmentName like @name";
-            reader = SqlHelper.GetReader(sql, new SqlParameter("@name", "%" + str + "%"));
+            if (isEx)
+            {
+                sql = "select * from tb_Department_X where DepartmentName = @name";
+            }
+            reader = SqlHelper.GetReader(sql, new SqlParameter("@name", isEx ? str : "%" + str + "%"));
             while (reader.Read())
             {
                 Department tmpDepartment = new Department
@@ -93,7 +101,11 @@ namespace LibraryCms.Models
             }
             reader.Close();
             sql = "select * from tb_Department_A where DepartmentName like @name";
-            reader = SqlHelper.GetReader(sql, new SqlParameter("@name", "%" + str + "%"));
+            if (isEx)
+            {
+                sql = "select * from tb_Department_A where DepartmentName = @name";
+            }
+            reader = SqlHelper.GetReader(sql, new SqlParameter("@name", isEx ? str : "%" + str + "%"));
             while (reader.Read())
             {
                 Department tmpDepartment = new Department
@@ -542,6 +554,19 @@ namespace LibraryCms.Models
             int i = SqlHelper.ExecuteCommand(sql_delUser);
             i = SqlHelper.ExecuteCommand(sql_delRole);
             return i;
+        }
+
+        public static int UpdateGroup(Role role)
+        {
+            string sql = "update tb_Role set RoleName=@roleName,DepartmentType=@deptType,DepartmentID=@deptId,Rights=@rights where RoleID=@roleId";
+            SqlParameter[] value = new SqlParameter[]{
+                new SqlParameter("@roleName",role.RoleName),
+                new SqlParameter("@deptType",role.Department.DepartmentType.ToString()),
+                new SqlParameter("@deptId",role.Department.DepartmentId),
+                new SqlParameter("@rights",role.Rights),
+                new SqlParameter("@roleId",role.RoleId),
+            };
+            return SqlHelper.ExecuteCommand(sql, value);
         }
     }
 }

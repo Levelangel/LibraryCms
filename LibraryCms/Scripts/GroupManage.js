@@ -57,6 +57,7 @@
                 var btnModify = li.getElementsByTagName("a")[0];
                 var btnDelete = li.getElementsByTagName("a")[1];
                 btnDelete.onclick = deleteGroup;
+                btnModify.onclick = updateGroup;
             }
         } else {
             if (res === "") { //没有查找到结果              
@@ -123,4 +124,19 @@ function deleteGroup(event) {
             return;
         }
     );
+}
+
+function updateGroup(event) {
+    var li = event.target.parentNode;
+    var span = li.getElementsByTagName('span')[0];
+    var groupNameType = span.innerText;
+    var groupName = groupNameType.split('：')[0];
+    layer.open({
+        type: 2,
+        title: '修改用户组',
+        shadeClose: true,
+        shade: 0.7,
+        area: ['800px', '420px'],
+        content: '/Admin/UpdateGroup/' + groupName
+    });
 }
