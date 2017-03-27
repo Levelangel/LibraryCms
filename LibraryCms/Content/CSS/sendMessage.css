@@ -1,0 +1,62 @@
+﻿#sendMessage {
+    margin:0 auto;
+    width:570px;
+    position:relative;
+}
+
+#sendMessage span{
+    display:inline-block;
+    width:100px;
+    text-align:right;
+    height:40px;
+    line-height:40px;
+}
+
+#sendMessage input[type=text] {
+    outline-color:#5FBB39;
+    border:solid 1px #ccc;
+    height:40px;
+    line-height:40px;
+    width:430px;
+    margin-bottom:20px;
+    padding-left:20px;
+    border-radius:4px;
+    font-size:16px;
+}
+
+#sendMessage textarea {
+    position:absolute;
+    left:100px;
+    top:130px;
+    width:445px;
+    height:110px;
+    max-width:445px;
+    max-height:110px;
+    border-radius:4px;
+    outline-color:#5FBB39;
+    border:solid 1px #ccc;
+    font-size:16px;
+}
+
+#sendMessage a {
+    display: block;
+    height:40px;
+    width:450px;
+    margin:105px auto 0;
+    text-align: center;
+    line-height:40px;
+    text-decoration:none;
+    border:solid 1px #5FBB39;
+    color: #5FBB39;
+    border-radius:4px;
+    transition: all linear 0.2s;
+    -o-transition: all linear 0.2s;
+    -ms-transition: all linear 0.2s;
+    -webkit-transition: all linear 0.2s;
+    -moz-transition: all linear 0.2s;
+}
+
+#sendMessage a:hover {
+    color:#fff;
+    background-color:#5FBB39;
+}

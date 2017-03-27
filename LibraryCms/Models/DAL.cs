@@ -427,7 +427,7 @@ namespace LibraryCms.Models
                 Message message = new Message
                 {
                     MessageID = int.Parse(reader["MessageID"].ToString()),
-                    From = int.Parse(reader["From"].ToString()),
+                    From = reader["From"].ToString(),
                     Time = DateTime.Parse(reader["Time"].ToString()),
                     Subject = reader["Subject"].ToString(),
                     Content = reader["Content"].ToString(),
@@ -437,6 +437,44 @@ namespace LibraryCms.Models
             }
             reader.Close();
             return messages;
+        }
+
+        public static int InsertMessage(String userid, Message msg)
+        {
+            string sql = "if (object_id('tb_Message_" + userid + "') is null)";
+            sql += "BEGIN ";
+            sql += "EXEC('";
+            sql += "CREATE TABLE tb_Message_" + userid + "(";
+            sql += "[MessageID] INT IDENTITY(1,1)NOT NULL PRIMARY KEY,";
+            sql += "[From] INT NOT NULL,";
+	        sql += "[Time] VARCHAR(20) NOT NULL,";
+	        sql += "[Subject] TEXT NOT NULL,";
+            sql += "[Content] TEXT NULL,";
+	        sql += "[Status] INT NOT NULL,";
+	        sql += "FOREIGN KEY([From]) REFERENCES tb_User([UserID])";
+            sql += ")";
+            sql += "')";
+            sql += "END";
+            int i = SqlHelper.ExecuteCommand(sql);
+            if (i == 0) return i;
+            sql = "insert into tb_Message_" + userid + " values(@from, @time, @subject,";
+            if(msg.Content == "")
+            {
+                sql += "NULL,";
+            }
+            else
+            {
+                sql += "@content,";
+            }
+            sql += "@status)";
+            SqlParameter[] values = new SqlParameter[] {
+                new SqlParameter("@from",msg.From),
+                new SqlParameter("@time",msg.Time.ToString()),
+                new SqlParameter("@subject",msg.Subject),
+                new SqlParameter("@content",msg.Content),
+                new SqlParameter("@status",msg.Status)
+            };
+            return SqlHelper.ExecuteCommand(sql, values);
         }
 
         //删除单个私信

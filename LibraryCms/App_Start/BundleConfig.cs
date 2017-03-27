@@ -51,6 +51,8 @@ namespace LibraryCms
             bundles.Add(new ScriptBundle("~/Scripts/js-addgroup").Include("~/Scripts/addgroup.js"));
             bundles.Add(new StyleBundle("~/Content/css-addgroup").Include("~/Content/css/addgroup.css"));
             bundles.Add(new ScriptBundle("~/Scripts/js-updategroup").Include("~/Scripts/updateGroup.js"));
+            bundles.Add(new StyleBundle("~/Content/css-sendmessage").Include("~/Content/css/sendMessage.css"));
+            bundles.Add(new ScriptBundle("~/Scripts/js-sendmessage").Include("~/Scripts/sendMessage.js"));
         }
     }
 }

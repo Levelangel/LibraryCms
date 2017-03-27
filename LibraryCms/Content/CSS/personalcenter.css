@@ -198,7 +198,7 @@
     font-family: "Microsoft YaHei";
 }
 #PersonalMail li .title {
-    margin-left:200px;
+    margin-left:70px;
     color :#000;
 }
 
@@ -206,6 +206,12 @@
     margin-top:10px;
     line-height:150%;
 }
+
+#PersonalMail li a {
+    color:#5FBB39;
+    cursor:pointer;
+}
+
 #mailType {
     width:190px;
     position:absolute;

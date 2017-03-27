@@ -199,11 +199,48 @@ namespace LibraryCms.Controllers
 
         public ActionResult SendMessage() //发送私信
         {
-            if (Session["isLogin"] != null && Session["isLogin"].ToString() == "True")
+            if (Session["isLogin"] == null || Session["isLogin"].ToString() != "True")
             {
-                return RedirectToAction("Index", "Admin");
+                Response.Write("需要登录");
+                return null;
+            }
+            if (ControllerContext.RouteData.Values["ID"] != null)
+            {
+                ViewBag.sendTo = ControllerContext.RouteData.Values["ID"].ToString();
             }
             return View();
+        }
+
+        [HttpPost]
+        public JsonResult SendTo()
+        {
+            if (Session["isLogin"] == null || Session["isLogin"].ToString() != "True")
+            {
+                return Json("need login");
+            }
+            string sendTo = Request["sendTo"];
+            string subject = Request["subject"];
+            string detail = Request["detail"];
+            User user = (User)Session["User"];
+            Message msg = new Message()
+            {
+                Time = DateTime.Now,
+                Status = 0,
+                Subject = subject,
+                Content = detail,
+                From = user.UserID
+            };
+            user = DAL.GetUser(sendTo);
+            if(msg.From == user.UserID)
+            {
+                return Json("same one");
+            }
+            int i = DAL.InsertMessage(user.UserID, msg);
+            if(i == 0)
+            {
+                return Json("sql error");
+            }
+            return Json("success");
         }
     }
 }

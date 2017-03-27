@@ -75,12 +75,17 @@ function mailNotRead() {
         ul.innerHTML = "";
         var tmp = '';
         for (var j = 0; j < res.length; j++) {
-            tmp += '<li><span>来自：' + res[j].from;
+            tmp += '<li><span>来自：<a name="sendTo" href="javascript:;">' + res[j].from + '</a>';
             tmp += '</span><span class="title">主题：' + res[j].msg.Subject;
             tmp += '</span><br/><p class="content">内容：' + res[j].msg.Content;
             tmp += '<span></span></p></li>';
         }
         ul.innerHTML = tmp;
+        var lis = ul.getElementsByTagName("li");
+        for (var j = 0; j < lis.length; j++) {
+            var a = lis[j].getElementsByTagName("a")[0];
+            a.onclick = sendMessageTo;
+        }
     }, "JSON");
 }
 
@@ -197,7 +202,19 @@ function sendMessage() {
         title: '发送消息',
         shadeClose: true,
         shade: 0.7,
-        area: ['600px', '360px'],
+        area: ['600px', '400px'],
         content: '/Account/SendMessage'
+    });
+}
+
+function sendMessageTo(event) {
+    var target_a = event.target;
+    layer.open({
+        type: 2,
+        title: '发送消息',
+        shadeClose: true,
+        shade: 0.7,
+        area: ['600px', '400px'],
+        content: '/Account/SendMessage/' + target_a.innerText
     });
 }

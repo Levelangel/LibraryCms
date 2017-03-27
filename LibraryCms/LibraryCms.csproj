@@ -156,6 +156,7 @@
     <Content Include="Content\CSS\index.css" />
     <Content Include="Content\CSS\login.css" />
     <Content Include="Content\CSS\personalcenter.css" />
+    <Content Include="Content\CSS\sendMessage.css" />
     <Content Include="Content\CSS\UserManage.css" />
     <Content Include="Content\CSS\_Layout.css" />
     <Content Include="Content\layer\layer.js" />
@@ -233,6 +234,7 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\sendMessage.js" />
     <Content Include="Scripts\updateGroup.js" />
     <Content Include="Scripts\updateMail.js" />
     <Content Include="Scripts\updatepassword.js" />

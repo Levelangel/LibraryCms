@@ -8,10 +8,17 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>发送消息</title>
+    @Styles.Render("~/Content/css-sendmessage")
+    @Scripts.Render("~/Scripts/jquery")
+    @Scripts.Render("~/Scripts/js-layer")
+    @Scripts.Render("~/Scripts/js-sendmessage")
 </head>
 <body>
-    <div>
-        
+    <div id="sendMessage">
+        <span>发送给：</span><input type="text" name="sendTo" value="@ViewBag.sendTo" />
+        <span>主题：</span><input type="text" name="subject" value="" />
+        <span>详细信息：</span><textarea name="detail"></textarea>
+        <a href="javascript:;">发送</a>
     </div>
 </body>
 </html>
