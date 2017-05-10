@@ -13,7 +13,7 @@
             for (var i = 0; i < resArr.length; i++) {
                 var obj = strToJson(resArr[i]); //Json字符串转Json对象
                 var tmpStr = '';
-                tmpStr += '<li><span>' + obj.RoleName + '：';
+                tmpStr += '<li><span class="groupName">' + obj.RoleName + '：';
                 //if (obj.Department.DepartmentType === 0) {
                 //    tmpStr += '系';
                 //}
@@ -25,7 +25,7 @@
                 //}
                 tmpStr += obj.Department.DepartmentName;
                 tmpStr += '</span>';
-                tmpStr += '<div><input type="checkbox" ';
+                tmpStr += '<div class="checkGroup"><input type="checkbox" ';
                 if (obj.Rights[0] === '1') {
                     tmpStr += 'checked="checked"';
                 }
@@ -49,7 +49,7 @@
                 if (obj.Rights[5] === '1') {
                     tmpStr += 'checked="checked"';
                 }
-                tmpStr += '/>系部管理</div><a href="javascript:;">修改</a><a href="javascript:;">删除</a></li>';
+                tmpStr += '/>系部管理</div><a href="javascript:;" class="btn">修改</a><a href="javascript:;" class="btn">删除</a></li>';
                 ul.innerHTML += tmpStr;
             }
             for (var j = 0; j < resArr.length; j++) {

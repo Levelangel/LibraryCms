@@ -113,9 +113,10 @@
     padding: 10px 20px;
     font-family: "Microsoft YaHei";
     position: relative;
+    overflow:hidden;
 }
 #result .add a,
-#result ul li a {
+#result ul li a.btn {
     display: inline-block;
     text-decoration: none;
     border:solid 1px #5FBB39;
@@ -135,12 +136,13 @@
     margin-top:15px;
 }
 #result .add a:hover,
-#result ul li a:hover {
+#result ul li a.btn:hover {
     color:#fff;
     background-color:#5FBB39;
 }
 #result .add span,
-#result ul li span {
+#result ul li span.groupName,
+#result ul li span.deptName {
     display: inline-block;
     height: 60px;
     line-height: 60px;
@@ -172,13 +174,50 @@
     vertical-align:middle;
 }
 
-#result ul li div {
+#result ul li .checkGroup {
     position: absolute;
     top: 10px;
     left:50%;
     margin-left: -120px;
 }
 
-#result ul li div input {
+#result ul li .checkGroup input {
     margin-left: 20px;
+}
+
+#result ul li span.bookName {
+
+}
+
+#result ul li a.detail {
+    display:inline-block;
+    height:20px;
+    line-height:20px;
+    width:50px;
+    text-decoration: none;
+    border:solid 1px #5FBB39;
+    color: #5FBB39;
+    border-radius:4px;
+    transition: all linear 0.2s;
+    -o-transition: all linear 0.2s;
+    -ms-transition: all linear 0.2s;
+    -webkit-transition: all linear 0.2s;
+    -moz-transition: all linear 0.2s;
+    text-align: center;
+    font-size:80%;
+    position:absolute;
+    right:10px;
+    top:10px;
+}
+
+#result ul li a.detail:hover{
+    color:#fff;
+    background-color:#5FBB39;
+}
+
+#result ul li div.bookInfo {
+    float:left;
+    width:100%;
+    height:22px;
+    overflow:hidden;
 }

@@ -14,7 +14,7 @@
             {
                 var obj = strToJson(resArr[i]); //Json字符串转Json对象
                 var tmpStr = '';
-                tmpStr += '<li><span>' + obj.DepartmentName + '</span>属于：';
+                tmpStr += '<li><span class="deptName">' + obj.DepartmentName + '</span>属于：';
                 tmpStr += '<input class="RadioX" value="X" name="Department' + i + '" type="radio"';
                 if (obj.DepartmentType === 0) {
                     tmpStr += 'checked="checked"';
@@ -27,8 +27,8 @@
                 if (obj.DepartmentType === 2) {
                     tmpStr += 'checked="checked"';
                 }
-                tmpStr += '/>管理员<a name="btnRight" href="javascript:;">修改</a>';
-                tmpStr += '<a name="btnLeft" href="javascript:;">删除</a></li>';
+                tmpStr += '/>管理员<a name="btnRight" href="javascript:;" class="btn">修改</a>';
+                tmpStr += '<a name="btnLeft" href="javascript:;" class="btn">删除</a></li>';
                 ul.innerHTML += tmpStr;
                 
             }

@@ -86,6 +86,9 @@ function mailNotRead() {
             var a = lis[j].getElementsByTagName("a")[0];
             a.onclick = sendMessageTo;
         }
+        if (ul.innerHTML == '') {
+            ul.innerHTML = '<p class="no-message">这里空空如也呢~</p>';
+        }
     }, "JSON");
 }
 
@@ -108,6 +111,9 @@ function mailHasSent() {
             tmp += '<span></span></p></li>';
         }
         ul.innerHTML = tmp;
+        if (ul.innerHTML == '') {
+            ul.innerHTML = '<p class="no-message">这里空空如也呢~</p>';
+        }
     }, "JSON");
 }
 
@@ -130,6 +136,9 @@ function mailHasRead() {
             tmp += '<span></span></p></li>';
         }
         ul.innerHTML = tmp;
+        if (ul.innerHTML == '') {
+            ul.innerHTML = '<p class="no-message">这里空空如也呢~</p>';
+        }
     }, "JSON");
 }
 
